@@ -1,0 +1,60 @@
+@import '../../styles.scss';
+
+.col-12 {
+	p,
+	.btn-container {
+		max-width: 800px;
+		width: 100%;
+		margin: 0 auto;
+	}
+	h3 {
+		margin-bottom: 25px;
+	}
+}
+
+// .mat-chex {
+// 	margin-right: 30px;
+// }
+
+// select {
+// 	display: block;
+//     border: none;
+//     outline: 1px solid #000;
+//     height: 30px;
+//     width: 100%;
+// }
+
+.mat-form-field-infix {
+	width: 100%;
+}
+
+.change-txt {
+	margin-bottom: 0px;
+	small {
+		margin-left: 15px;
+	}
+}
+
+.border-bottom {
+	border-bottom: 3px solid $black;
+	margin-bottom: 30px;
+}
+
+.save-later {
+	font-family: FuturaBold, Arial, sans-serif;
+	font-size: 14px;
+	cursor: pointer;
+	-webkit-cursor: pointer;
+    -moz-cursor: pointer;
+    -ms-cursor: pointer;
+    @media screen and (max-width: 400px) {
+    	width: 100%;
+    	margin-top: 30px;
+    }
+}
+.mat-radio-button {
+	display: block;
+}
+.bottom-nav-row {
+	margin-top: 40px;
+}

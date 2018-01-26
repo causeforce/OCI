@@ -1,0 +1,84 @@
+@import '../../styles.scss';
+
+#step-08 {
+	h4 {
+		margin-bottom: 20px;
+	}
+	.row:first-child {
+		p:nth-child(3) {
+			margin-bottom: 40px;
+		}
+	}
+}
+
+.border-bottom {
+	border-bottom: 3px solid $black;
+	margin-bottom: 30px;
+}
+
+.row {
+	margin: 0 auto;
+}
+
+p {
+	padding-left: 15px
+}
+
+.mat-input {
+    max-width: 350px;
+}
+
+.btn-cont {
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.row {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 0 15px;
+}
+
+.results-head {
+	background: $gray;
+	padding: 15px 0;
+	width: 100%;
+	p {
+		margin-bottom: 0px;
+		@media screen and (max-width: 400px) {
+			padding-left: 0px;
+			font-size: 2.6vw;
+		}
+	}
+}
+.results-cont {
+	a.inv-tent {
+		padding-left: 20px;
+	}
+	@media screen and (max-width: 400px) {
+		.row {
+			padding: 0;
+			.col {
+				a {
+					font-size: 14px;
+				}
+				&:nth-child(2) {
+					padding-left: 0;
+				}
+			}
+		}
+		a.inv-tent {
+			padding-left: 10px;
+		}
+	}
+}
+.inv-tent {
+	cursor: pointer;
+	-webkit-cursor: pointer;
+	-moz-cursor: pointer;
+}
+
+.search-row .search-btn {
+	margin-top: 30px;
+}

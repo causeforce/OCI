@@ -1,0 +1,19 @@
+@import '../../styles.scss';
+
+#step-09 {
+
+	button {
+		margin: 30px 0;
+	}
+	a {
+		color: $black;
+		display: block;
+		cursor: pointer;
+		-moz-cursor: pointer;
+		-ms-cursor:pointer;
+	}
+
+	strong.txt-blue {
+		text-transform: uppercase;
+	}
+}

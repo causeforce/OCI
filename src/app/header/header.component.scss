@@ -1,0 +1,30 @@
+@import '../../styles.scss';
+
+.log-out {
+	background: #e74c3c;
+	color: #fff;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+.logo {
+	img {
+		max-width: 200px;
+		margin-left: 20px;
+	}
+}
+nav {
+	padding: 20px 0;
+}
+
+.oc {
+	background: $black;
+	color: $white;
+	text-align: center;
+	padding: 20px 0;
+	margin-bottom: 20px;
+	h2 {
+		margin-bottom: 0px;
+		text-transform: uppercase;
+	}
+}

@@ -1,0 +1,89 @@
+<app-stepper></app-stepper>
+
+<!-- Preloader -->
+<div class="mat-spinner-container" *ngIf="!fundResponse.getFundraisingResponse">
+	<div class="spinner-inner">
+		<mat-spinner></mat-spinner>
+	</div>
+</div>
+
+<!-- Step 07 -->
+<div class="container" id="step-07" *ngIf="fundResponse.getFundraisingResponse">
+	<div class="form-container" >
+		<div class="row">
+			<h4>Commit to Your Fundraising!</h4>
+		</div>
+		<div class="row" *ngIf="regResponse">
+			<div class="col-md-4" *ngIf="data.username || data.consUserName">
+				<p>Username:</p>
+				<h4 class="txt-blue">{{data.consUserName || data.username}}</h4>
+			</div>
+			<div class="col-md-4" *ngIf="amountRaised">
+				<p>Amount raised:</p>
+				<h4 class="txt-blue">{{amountRaised}}</h4>
+			</div>
+			<div class="col-md-4" *ngIf="minimumGoal">
+				<p>Minimum required:</p>
+				<h4 class="txt-blue">{{minimumGoal}}</h4>
+			</div>
+		</div>
+		<div class="row">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
+		</div>
+
+		<div class="border-bottom"></div>
+
+		<div class="row">
+			<h4>Re-Check My Status</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
+			<button (click)="reload()" class="btn-bw">Update Status</button>
+		</div>
+		
+		<!--BEGIN DSP / ISP -->
+		<div class="border-bottom" *ngIf="hideDSP === true || hideISP === true"></div>
+		
+		<!-- ISP ROW -->
+		<div class="row" *ngIf="hideISP === true">
+			<h4>Instant Self-Pledge</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
+			<a href="{{ispURL}}" target="_blank">
+				<button class="btn-bw dsp-isp">Pay My Fundraising Balance</button>
+			</a>
+		</div>
+
+		<!-- DSP ROW -->
+		<div class="row" *ngIf="hideDSP === true">
+			<h4>Delayed Self-Pledge</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
+			<a href="{{dspURL}}" target="_blank">
+				<button class="btn-bw dsp-isp">Commit to My Fundraising</button>
+			</a>
+		</div>
+
+		<div class="border-bottom" *ngIf="hideDSP === true || hideISP === true"></div>
+		<!-- END DSP / ISP -->
+
+	</div>
+	<div class="row bottom-nav-row">
+		<div class="form-container">
+			<div class="btn-container">
+				<button 
+					mat-raised-button 
+					color="accent" 
+					class="prev-btn" 
+					(click)="previous()"
+					*ngIf="checkInCommitted">
+					Back
+				</button>
+				<button 
+					mat-raised-button 
+					color="primary" 
+					class="next-btn"
+					(click)="next()" 
+					[disabled]="fundsMet">
+					Next
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

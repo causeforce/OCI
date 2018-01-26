@@ -1,0 +1,85 @@
+<div #hideMe class="stepper-container">
+
+	<div class="bar"></div>
+	<div *ngIf="router.url === '/step-03'" class="progress-2"></div>
+	<div *ngIf="router.url === '/step-04'" class="progress-3"></div>
+	<div *ngIf="router.url === '/step-05'" class="progress-4"></div>
+	<div *ngIf="router.url === '/step-06'" class="progress-5"></div>
+	<div *ngIf="router.url === '/step-07'" class="progress-6"></div>
+	<div *ngIf="router.url === '/step-08'" class="progress-7"></div>
+	<div *ngIf="router.url === '/step-09'" class="progress-8"></div>
+
+	<!-- Step 01 (Update Info) -->
+	<div class="stepper-each">
+		<div #step01 class="step">
+			1
+		</div>
+		<div class="stepper-txt">
+			Update Info
+		</div>
+	</div>
+	<!-- Step 02 (Important Info) -->
+	<div class="stepper-each">
+		<div #step02 class="step">
+			2
+		</div>
+		<div class="stepper-txt">
+			Important Info
+		</div>
+	</div>
+	<!-- Step 03 (Health Insurance) -->
+	<div class="stepper-each">
+		<div #step03 class="step">
+			3
+		</div>
+		<div class="stepper-txt">
+			Health Insurance
+		</div>
+	</div>
+	<!-- Step 04 (Safety Video) -->
+	<div class="stepper-each">
+		<div #step04 class="step">
+			4
+		</div>
+		<div class="stepper-txt">
+			Safety Video
+		</div>
+	</div>
+	<!-- Step 05 (Register Now) -->
+	<div class="stepper-each">
+		<div #step05 class="step">
+			5
+		</div>
+		<div class="stepper-txt">
+			Register Now
+		</div>
+	</div>
+	<!-- Step 06 (Commitment) -->
+	<div class="stepper-each">
+		<div #step06 class="step">
+			6
+		</div>
+		<div class="stepper-txt">
+			Commitment
+		</div>
+	</div>
+	<!-- Step 07 (Tentmate) -->
+	<div class="stepper-each">
+		<div #step07 class="step">
+			7
+		</div>
+		<div class="stepper-txt">
+			Tentmate
+		</div>
+	</div>
+	<!-- Step 08 (Summary) -->
+	<div class="stepper-each">
+		<div #step08 class="step">
+			8
+		</div>
+		<div class="stepper-txt">
+			Summary
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,201 @@
+<app-stepper></app-stepper>
+
+<!-- Preloader -->
+<div class="mat-spinner-container" *ngIf="!dataService">
+	<div class="spinner-inner">
+		<mat-spinner></mat-spinner>
+	</div>
+</div>
+
+<div class="container" id="step-02" *ngIf="dataService">
+	<div class="english-locale" *ngIf="dataService.localeEn">
+		<div class="row">
+			<div class="col-12">
+				<div class="pg-container">
+					<h3>Update Your Information</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero.
+					</p>
+					<p>You are registered as a {{ dataService.participationType }}. If this is incorrect, please call (888) 771-BIKE(2453)</p>
+				</div>
+			</div>
+		</div>
+		<div class="row" *ngIf="consData">
+			<form class="form-container" [formGroup]="step02Form" *ngIf="step02Form">
+				<div class="form-group">
+					<label class="font-bold" for="participation-type">
+						Participation Type: <span class="txt-blue">{{ dataService.participationType }}</span>
+					</label>
+				</div>
+				<div class="form-group" *ngIf="dataService.teamName">
+					<label class="font-bold" for="team-name">
+						Team name: <span class="txt-blue">{{ dataService.teamName }}</span>
+					</label>
+				</div>
+				<div class="form-group">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="First name:" 
+							value="{{firstName}}" 
+							[(ngModel)]="firstName" 
+							formControlName="firstName">
+						<button mat-button *ngIf="firstName" matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.firstName.invalid">
+					    	First name is <strong>required</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-group">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="Last name:" 
+							value="{{lastName}}" 
+							[(ngModel)]="lastName" 
+							formControlName="lastName">
+						<button mat-button *ngIf="lastName" matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.lastName.invalid">
+					    	Last name is <strong>required</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-group">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="Street Address Line 1:" 
+							value="{{primaryAddress1}}" 
+							[(ngModel)]="primaryAddress1" 
+							formControlName="liveAddress1">
+						<button mat-button *ngIf="primaryAddress1" matSuffix mat-icon-button aria-label="Clear" (click)="primaryAddress1=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.liveAddress1.invalid">
+					      Street address is <strong>required.</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-group">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							placeholder="Street Address Line 2:" 
+							value="{{primaryAddress2}}" 
+							[(ngModel)]="primaryAddress2" 
+							formControlName="liveAddress2">
+						<button mat-button *ngIf="primaryAddress2" matSuffix mat-icon-button aria-label="Clear" (click)="primaryAddress2=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+					</mat-form-field>
+				</div>
+				<div class="form-group">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="City" 
+							value="{{primaryCity}}" 
+							[(ngModel)]="primaryCity" 
+							formControlName="liveCity">
+						<button mat-button *ngIf="primaryCity" matSuffix mat-icon-button aria-label="Clear" (click)="primaryCity=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.liveCity.invalid">
+					      City is <strong>required.</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<mat-form-field class="mat-input">
+							<input 
+								matInput 
+								required 
+								placeholder="State/Province" 
+								value="{{primaryState}}" 
+								[(ngModel)]="primaryState" 
+								formControlName="liveState">
+							<button mat-button *ngIf="primaryState" matSuffix mat-icon-button aria-label="Clear" (click)="primaryState=''">
+							    <mat-icon>close</mat-icon>
+							</button>
+							<mat-error *ngIf="step02Form.controls.liveState.invalid">
+						      State is <strong>required.</strong>
+						    </mat-error>
+						</mat-form-field>
+					</div>
+					<div class="form-group col-md-6">
+						<mat-form-field class="mat-input">
+							<input 
+								matInput 
+								required 
+								placeholder="Zip" 
+								value="{{primaryZip}}" 
+								[(ngModel)]="primaryZip" 
+								formControlName="liveZip">
+							<button mat-button *ngIf="primaryZip" matSuffix mat-icon-button aria-label="Clear" (click)="primaryZip=''">
+							    <mat-icon>close</mat-icon>
+							</button>
+							<mat-error *ngIf="step02Form.controls.liveState.invalid">
+						      Zipcode is <strong>required.</strong>
+						    </mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-12">
+						<mat-form-field>
+							<mat-select formControlName="genderSelect" placeholder="Gender: {{gender}}" [(ngModel)]="gender">
+								<p class="change-txt">
+									<small>Make a selection:</small>
+								</p>
+								<mat-option *ngFor="let gender of matSelect" [value]="gender.value">
+									{{ gender.viewValue }}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="step02Form.controls.liveState.invalid">
+								State is <strong>required.</strong>
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- If French Locale -->
+	<div class="french-locale" *ngIf="dataService.storageLocaleFR">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="text-center">Bienvenue à l'étape 2!</h1>
+				<p class="text-center">Cela signifie que vous vous êtes connecté avec succès.</p>
+
+				<p *ngIf="dataService" class="text-center">Cons ID:{{ dataService.consID }}</p>
+			</div>
+		</div>
+		<div *ngIf="dataService.consID === '4291769'" class="row" id="admin-container">
+			<div class="col-12">
+				<p class="text-center">
+					Vous ne voyez cette ligne que si vous êtes un administrateur, cette zone sera pour un panneau d'administration dans le futur.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="consData">
+		<div class="col-12">
+			<div class="btn-container">
+				<button mat-raised-button color="primary" class="next-btn" (click)="updateUser()" [disabled]="step02Form.invalid">
+					Next
+				</button>
+				<a (click)="updateUserSave()" class="save-later float-right text-uppercase">Save For Later</a>
+			</div>
+		</div>
+	</div>
+</div>
