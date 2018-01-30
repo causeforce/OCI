@@ -104,8 +104,9 @@ export class Step08Component implements OnInit {
 					// this.getTentingSearch();
 				} else {
 					// console.log('Tenting is NOT allowed for this event, route them to summary.');
+					
 					// Route participant to the summary page using router navigate
-					this.next();
+					this.nextFlowStep();
 				}
 
 			}, (err) => {

@@ -38,6 +38,15 @@
 
 #locale-check {
 	margin-top: 60px;
+	p {
+		color: #909090;
+		font-size: 30px;
+		margin-bottom: 40px;
+	}
+	button.mat-raised-button.mat-primary {
+	    max-width: 300px;
+	    margin: 20px;
+	}
 }
 
 .mat-input {
@@ -52,9 +61,4 @@
 }
 mat-icon {
 	cursor: pointer;
-}
-
-#locale-check button.mat-raised-button.mat-primary {
-    max-width: 300px;
-    margin: 20px;
 }

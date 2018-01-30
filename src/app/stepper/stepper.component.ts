@@ -17,6 +17,8 @@ export class StepperComponent implements OnInit {
  	@ViewChild('step08') el8:ElementRef;
  	@ViewChild('hideMe') hide:ElementRef;
 
+ 	@ViewChild('txtActive') txtActive:ElementRef;
+
 	constructor(private renderer: Renderer2, private router: Router) { }
 
 	ngOnInit() {
@@ -27,22 +29,30 @@ export class StepperComponent implements OnInit {
 
 		if (this.router.url === '/step-02'){
 		    this.renderer.addClass(this.el.nativeElement, 'active');
+
+		    this.el.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-03'){
 			this.renderer.addClass(this.el.nativeElement, 'active');
 		    this.renderer.addClass(this.el2.nativeElement, 'active');
+
+		    this.el2.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-04'){
 			this.renderer.addClass(this.el2.nativeElement, 'active');
 		    this.renderer.addClass(this.el3.nativeElement, 'active');
+
+		    this.el3.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-05'){
 			this.renderer.addClass(this.el2.nativeElement, 'active');
 		    this.renderer.addClass(this.el3.nativeElement, 'active');
 		    this.renderer.addClass(this.el4.nativeElement, 'active');
+
+		    this.el4.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-06'){
@@ -50,6 +60,8 @@ export class StepperComponent implements OnInit {
 		    this.renderer.addClass(this.el3.nativeElement, 'active');
 		    this.renderer.addClass(this.el4.nativeElement, 'active');
 		    this.renderer.addClass(this.el5.nativeElement, 'active');
+
+		    this.el5.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-07'){
@@ -58,6 +70,8 @@ export class StepperComponent implements OnInit {
 		    this.renderer.addClass(this.el4.nativeElement, 'active');
 		    this.renderer.addClass(this.el5.nativeElement, 'active');
 		    this.renderer.addClass(this.el6.nativeElement, 'active');
+
+		  	this.el6.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-08'){
@@ -67,6 +81,8 @@ export class StepperComponent implements OnInit {
 		    this.renderer.addClass(this.el5.nativeElement, 'active');
 		    this.renderer.addClass(this.el6.nativeElement, 'active');
 		    this.renderer.addClass(this.el7.nativeElement, 'active');
+
+		    this.el7.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/step-09'){
@@ -77,12 +93,13 @@ export class StepperComponent implements OnInit {
 		    this.renderer.addClass(this.el6.nativeElement, 'active');
 		    this.renderer.addClass(this.el7.nativeElement, 'active');
 		    this.renderer.addClass(this.el8.nativeElement, 'active');
+
+		    this.el8.nativeElement.classList.add('current');
 		}
 
 		if (this.router.url === '/'){
 		    this.renderer.addClass(this.hide.nativeElement, 'hide');
-		}
-		
+		}	
 		// if (window.location.href.indexOf("step-02") > -1) {
 		// 	console.log('you are in step 2');
 		// 	this.renderer.addClass(this.el.nativeElement, 'active');

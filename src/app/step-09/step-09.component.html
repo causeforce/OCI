@@ -14,6 +14,15 @@
 				<h4>Congratulations</h4>
 				<p>You have completed Online Check-in!</p>
 				<br>
+			</div>
+			<div class="col print-col">
+				<a (click)="print()">
+					<strong>Print This Screen</strong>
+				</a>
+			</div>
+		</div>
+		<div class="row" *ngIf="data.getConsInfo">
+			<div class="col">
 				<p class="txt-grey">
 					First name: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.name.first}}</strong>
 				</p>
@@ -76,10 +85,6 @@
 			class="search-btn">
 				Return to Participation Center	
 			</button>
-		</a>
-
-		<a (click)="print()">
-			<strong>Print This Screen</strong>
 		</a>
 	</div>
 </div>

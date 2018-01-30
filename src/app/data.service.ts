@@ -22,7 +22,7 @@ export class DataService {
 	loginMethod:string;
 	method:string;
 
-	// Setting logged in state
+	// Setting logged in state (must be false initially)
 	isloggedIn:any = false;
 
 	// Registeration Variables
@@ -248,6 +248,8 @@ export class DataService {
 
 				localStorage.setItem('token', this.ssoToken);
 				this.tokenExpired = false;
+
+				this.storageToken = localStorage.getItem('token');
 
 				// Get flow step
 				this.getFlowStepLogin();

@@ -11,7 +11,8 @@
 <div class="container" id="step-07" *ngIf="fundResponse.getFundraisingResponse">
 	<div class="form-container" >
 		<div class="row">
-			<h4>Commit to Your Fundraising!</h4>
+			<h4 *ngIf="fundsMet">Commit to Your Fundraising!</h4>
+			<h4 *ngIf="!fundsMet">Congratulations, you have enough funds raised for you to complete the Online Check-in process!</h4>
 		</div>
 		<div class="row" *ngIf="regResponse">
 			<div class="col-md-4" *ngIf="data.username || data.consUserName">
@@ -33,7 +34,7 @@
 
 		<div class="border-btm"></div>
 
-		<div class="row">
+		<div class="row" *ngIf="fundsMet">
 			<h4>Re-Check My Status</h4>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
 			<button (click)="reload()" class="btn-bw">Update Status</button>

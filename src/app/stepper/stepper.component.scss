@@ -36,9 +36,9 @@
 		    color: #fff;
 		    margin-bottom: 15px;
 		}
-		.step.active {
-			background: $blue;
-		}
+		// .step.active {
+		// 	background: $blue;
+		// }
 		.stepper-txt {
 			color: #c1c1c1;
 		    font-size: 12px;
@@ -46,6 +46,17 @@
 		    @media screen and (max-width: 768px) {
 		    	display: none;
 		    }
+		}
+	}
+	.stepper-each.active {
+		.step {
+			background: $blue;
+		}
+	}
+	.stepper-each.active.current {
+		.stepper-txt {
+			color: $blue;
+			font-family: FuturaBold, Helveticca, sans-serif;
 		}
 	}
 	.bar {
