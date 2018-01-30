@@ -9,6 +9,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataService {
 
+	/* ============  Global Variables Below ============*/
+
 	// Login Information
  	username:string;
 	password:string;
@@ -112,7 +114,7 @@ export class DataService {
 	localeFr:boolean = false;
 	localeEn:boolean = true;
 
-	montrealLocale:boolean = false;
+	montrealLocale:boolean = true;
 
 	// LocalStorage Locale Variables
 	storageLocaleEN:boolean = true;
@@ -124,8 +126,6 @@ export class DataService {
 	tentStatus:string; 
  	
  	constructor(private http: HttpClient, private router: Router, public snackBar: MatSnackBar) {
- 		// console.log(JSON.parse(localStorage.getItem('showLocale')));
- 		// console.log(this.toggleLocaleMenu());
 
  		if (localStorage.getItem('token') !== undefined || null) {
 			this.tokenExpired = false;
@@ -249,15 +249,9 @@ export class DataService {
 				localStorage.setItem('token', this.ssoToken);
 				this.tokenExpired = false;
 
-				// this.router.navigate(['/step-02']);
-
 				// Get flow step
 				this.getFlowStepLogin();
-				// console.log(this.ssoToken);
-				// this.getRegInfo();
-				// this.getParticipationType();
 			}, (err) => {
-				console.log('There was an error trying to log user in:');
 				console.log(err);
 				this.loginErr = true;
 
@@ -305,7 +299,6 @@ export class DataService {
 				if (this.flowStep === '8') {
 					this.router.navigate(['/step-09']);
 				}
-				// console.log('Current Flow Step: ' + this.flowStep);
 			}, (err) => {
 				console.log(err);
 			});
@@ -330,6 +323,8 @@ export class DataService {
 		this.http.post(this.convioURL + this.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
+			}, (err) => {
+				console.log(err);
 			});
 	}
 

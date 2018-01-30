@@ -53,3 +53,8 @@
 mat-icon {
 	cursor: pointer;
 }
+
+#locale-check button.mat-raised-button.mat-primary {
+    max-width: 300px;
+    margin: 20px;
+}

@@ -31,7 +31,7 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
 		</div>
 
-		<div class="border-bottom"></div>
+		<div class="border-btm"></div>
 
 		<div class="row">
 			<h4>Re-Check My Status</h4>
@@ -40,7 +40,7 @@
 		</div>
 		
 		<!--BEGIN DSP / ISP -->
-		<div class="border-bottom" *ngIf="hideDSP === true || hideISP === true"></div>
+		<div class="border-btm" *ngIf="hideDSP === true || hideISP === true"></div>
 		
 		<!-- ISP ROW -->
 		<div class="row" *ngIf="hideISP === true">
@@ -60,7 +60,7 @@
 			</a>
 		</div>
 
-		<div class="border-bottom" *ngIf="hideDSP === true || hideISP === true"></div>
+		<div class="border-btm" *ngIf="hideDSP === true || hideISP === true"></div>
 		<!-- END DSP / ISP -->
 
 	</div>
@@ -71,7 +71,7 @@
 					mat-raised-button 
 					color="accent" 
 					class="prev-btn" 
-					(click)="previous()"
+					(click)="previousFlowStep()"
 					*ngIf="checkInCommitted">
 					Back
 				</button>
@@ -79,7 +79,7 @@
 					mat-raised-button 
 					color="primary" 
 					class="next-btn"
-					(click)="next()" 
+					(click)="nextFlowStep()" 
 					[disabled]="fundsMet">
 					Next
 				</button>

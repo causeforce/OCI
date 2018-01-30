@@ -20,17 +20,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./step-01.component.scss']
 })
 export class Step01Component implements OnInit {
-
+	// Local boolean
 	hide = true;
 
+	// FormGroup for Validation
 	loginForm: FormGroup;
 
+	// Matching the Error state
 	matcher = new MyErrorStateMatcher();
 
 	constructor(private dataService: DataService, private http: HttpClient, private router: Router) {
 		
 		// Checking if the user is logged in, if so go to step 2
-		console.log(dataService.isloggedIn);
 		if (this.dataService.isLoggedIn() === true && this.dataService.tokenExpired === false) {
 			console.log('Step 1: You are logged in already...');
 			this.router.navigate(['/step-02']);
@@ -38,7 +39,7 @@ export class Step01Component implements OnInit {
 	}
 
 	ngOnInit() {
-
+		// Setting the FormGroup properties
 		this.loginForm = new FormGroup({
 			username: new FormControl('', Validators.required),
 			password: new FormControl('', Validators.required)

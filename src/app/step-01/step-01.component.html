@@ -1,15 +1,17 @@
-<div class="container" id="locale-check" *ngIf="dataService.montrealLocale">
+<!-- Area for Locale Selector -->
+<div class="container" id="locale-check" *ngIf="dataService.show">
 	<div class="row justify-content-md-center">
 		<div class="col-12 text-center">
 			<h3>Before Proceeding, please select your language.</h3>
 			<h3>Avant de poursuivre, veuillez sélectionner votre langue.</h3>
-			<button (click)="setLocaleEN()" class="english-btn">English</button>
-			<button (click)="setLocaleFR()" class="french-btn">Français</button>
+			<button mat-raised-button color="primary"  (click)="setLocaleEN()">English</button>
+			<button mat-raised-button color="primary"  (click)="setLocaleFR()" class="french-btn">Français</button>
 		</div>
 	</div>
 </div>
-<!-- Display English Text -->
-<div *ngIf="dataService.localeEn" class="container" id="login-container">
+
+<!-- English Text Area -->
+<div *ngIf="dataService.storageLocaleEN" class="container" id="login-container">
 	<div class="row justify-content-md-center align-self-center" >
 		<div class="col-12 col-md-6">
 			<div class="login-form-container">
@@ -64,7 +66,7 @@
 	</div>
 </div>
 
-<!-- Display French Text -->
+<!-- French Text Area -->
 <div *ngIf="dataService.storageLocaleFR" class="container" id="login-container">
 	<div class="row justify-content-md-center align-self-center" >
 		<div class="col-12 col-md-6">
@@ -73,18 +75,49 @@
 					Bienvenue à l'enregistrement en ligne pour le français. 
 					<br>Veuillez vous connecter ci-dessous.</h2>
 				<br/>
-				<form id="ssoForm">
-					<div class="form-group">
-						<label for="username">User Name: {{ dataService.username }}</label>
-						<input type="username" class="form-control" id="username" placeholder="Enter username..." 
-						(keyup)="usernameKey($event)">
-					</div>
-					<div class="form-group">
-						<label for="password">Password:</label>
-						<input type="password" class="form-control" id="password" placeholder="Enter password..." 
-						(keyup)="passwordKey($event)">
-					</div>
-					<button class="btn-blue" (click)="dataService.logMeIn()">Login</button>
+
+				<form id="ssoForm" [formGroup]="loginForm">
+						<div class="form-group">
+							<mat-form-field class="mat-input">
+								<input 
+									required 
+									matInput 
+									placeholder="Enter your username..." 
+									[(ngModel)]="dataService.username" 
+									[errorStateMatcher]="matcher" 
+									formControlName="username">
+									<!-- <button mat-button *ngIf="dataService.username" matSuffix mat-icon-button aria-label="Clear" (click)="dataService.username=''">
+									    <mat-icon>close</mat-icon>
+									</button> -->
+
+									<mat-error *ngIf="loginForm.invalid">
+								      Username is <strong>required</strong>
+								    </mat-error>
+							</mat-form-field>
+						</div>
+						<div class="form-group">
+							<mat-form-field class="mat-input">
+								<input 
+								required 
+								matInput 
+								[type]="hide ? 'password' : 'text'"   
+								placeholder="Enter your password..." 
+								[(ngModel)]="dataService.password" 
+								[errorStateMatcher]="matcher" 
+								formControlName="password">
+								<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+
+								<mat-error *ngIf="loginForm.invalid">
+							      Password is <strong>required</strong>
+							    </mat-error>
+							</mat-form-field>
+						</div>
+					<button mat-raised-button color="primary" [disabled]="loginForm.invalid"(click)="dataService.logMeIn()">
+						Login
+					</button>
+					<a class="fgpass" href="https://secure2.convio.net/cfrca/site/UserLogin?CMD=ForgotPassword">
+						Forgot Password?
+					</a>
 				</form>
 			</div>
 		</div>

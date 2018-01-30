@@ -29,7 +29,9 @@ export class Step03Component implements OnInit {
 	buttonStatus:boolean = true;
 
 	// Flowstep
-	flowStep:string='2';
+	flowStep:string= '2';
+	flowStepResults:any={};
+	getFlowStepNumber:string;
 
 	// Results from HTTP calls set as Objects for OOP
 	surveyResults:any = {};
@@ -116,18 +118,24 @@ export class Step03Component implements OnInit {
 
 		// Checking logged in state, if they are logged in run regInfo() and getUserInfo() functions from the global dataService.
 		if (this.dataService.isLoggedIn() === true && this.dataService.tokenExpired === false) {
-			// console.log('You are logged in!');
-			this.getSurveyRes();
-			this.dataService.getRegInfo();
+
+			// Get the current flowstep
+			this.getFlowStep();
 
 			// this.dataService.getParticipationType();
 		} else if (this.dataService.storageToken === undefined) {
-			// console.log('Auth Token Expired.');
+			this.snackBar.open("Login session expired, please login again.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.route.navigate(['/step-01']);
 
 		} else {
 			// if not logged in, go back to step 1 (login page)
-			// console.log('You are not logged in, get outta here!');
+			this.snackBar.open("You are not logged in, please login.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.route.navigate(['/step-01']);
 		}
 
@@ -324,6 +332,8 @@ export class Step03Component implements OnInit {
 			this.emergencyPhone = '';
 		}
 
+		this.flowStep = '3';
+
 		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&emergency_name=' + this.dataService.emergencyName + '&emergency_phone=' + this.dataService.emergencyPhone + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.method, null) 
 			.subscribe(res => {
@@ -337,6 +347,34 @@ export class Step03Component implements OnInit {
 	// Previous Route
 	previous() {
 		this.route.navigate(['/step-02']);
+	}
+
+	// Get the current Flowstep
+	getFlowStep() {
+		const token = localStorage.getItem('token');
+		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.torontoID + '&sso_auth_token='+ token;
+		this.http.post(this.dataService.convioURL + this.method, null)
+			.subscribe(res => {
+				this.flowStepResults = res;
+				this.getFlowStepNumber = this.flowStepResults.getFlowStepResponse.flowStep;
+
+				// Checking the participants flow step to prevent user from skipping a flowstep
+				if (this.getFlowStepNumber === this.flowStep) {
+					// If the flow step matches to where they are supposed to be, then run the functions for the page below
+					this.getSurveyRes();
+					this.dataService.getRegInfo();
+				} else {
+					// If flowstep does not match, show error message and kick them back to the previous page/flowstep.
+					this.snackBar.open("Please don't try to skip pages.", "Close", {
+                        duration: 3500,
+                        extraClasses: ['error-info']
+               		});
+					this.previous();
+				}
+
+			}, (err) => {
+				console.log(err);
+			});
 	}
 
 }

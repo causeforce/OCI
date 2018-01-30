@@ -18,7 +18,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
 @Component({
   selector: 'app-step-06',
   templateUrl: './step-06.component.html',
@@ -26,11 +25,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class Step06Component implements OnInit {
 
-	// Error state matcher for the form validation
-	matcher = new MyErrorStateMatcher();
-
 	// Setting the FlowStep
 	flowStep:string = '5';
+	flowStepResults:any={};
+	getFlowStepNumber:string;
+
+	// Error state matcher for the form validation
+	matcher = new MyErrorStateMatcher();
 
 	// Defining variables tied with the DOM
 	upsellResults:string;
@@ -67,17 +68,23 @@ export class Step06Component implements OnInit {
 		// Checking logged in state, and running correct functions
 		if (this.data.isLoggedIn() === true && this.data.tokenExpired === false) {
 			// console.log('You are logged in!');
-			this.getSurveyRes();
-			this.updateFlowStep();
+
+			this.getFlowStep();
 
 			// this.dataService.getParticipationType();
 		} else if (this.data.storageToken === undefined) {
-			// console.log('Auth Token Expired.');
+			this.snackBar.open("Login session expired, please login again.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.route.navigate(['/step-01']);
 
 		} else {
 			// if not logged in, go back to step 1 (login page)
-			// console.log('You are not logged in, get outta here!');
+			this.snackBar.open("You are not logged in, please login.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.route.navigate(['/step-01']);
 		}
 
@@ -156,7 +163,9 @@ export class Step06Component implements OnInit {
                         duration: 3500,
                         extraClasses: ['saved-info']
                 });
-				this.route.navigate(['/step-07']);
+
+                // Route user to next route once http post is successful
+				this.nextFlowStep();
 			}, (error) => {
 				console.log(error);
 			});
@@ -194,7 +203,7 @@ export class Step06Component implements OnInit {
 
 	// Update the current Flowstep
 	updateFlowStep() {
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.storageToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// console.log('Flow step updated.')
@@ -205,9 +214,68 @@ export class Step06Component implements OnInit {
 			});
 	}
 
-	// Previous Route
-	previous() {
-		this.route.navigate(['/step-05']);
+	// Update the flowStep to the next flowStep once everything checks out
+	nextFlowStep() {
+		this.flowStep = '6';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.http.post(this.data.convioURL + this.data.method, null) 
+			.subscribe(res => {
+				// Update the flowStep to the next flowstep once everything checks out properly
+				this.route.navigate(['/step-07']);
+			}, (err) => {
+				if (err) {
+					console.log('There was an error updating the flowstep.');
+				}
+			});
+	}
+
+	// Update the current Flowstep
+	previousFlowStep() {
+		this.flowStep = '4';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.http.post(this.data.convioURL + this.data.method, null) 
+			.subscribe(res => {
+
+				// Route user to previous flow step
+				this.route.navigate(['/step-05']);
+			}, (err) => {
+				if (err) {
+					console.log('There was an error updating the flowstep.');
+				}
+			});
+	}
+
+	// Get the current Flowstep
+	getFlowStep() {
+		const token = localStorage.getItem('token');
+		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ token;
+		this.http.post(this.data.convioURL + this.data.method, null)
+			.subscribe(res => {
+				this.flowStepResults = res;
+				this.getFlowStepNumber = this.flowStepResults.getFlowStepResponse.flowStep;
+
+				// Checking the participants flow step to prevent user from skipping a flowstep
+				if (this.getFlowStepNumber === this.flowStep) {
+					// If the flow step matches to where they are supposed to be, then run the functions for the page below
+					this.getSurveyRes();
+					this.updateFlowStep();
+				} else {
+					// If flowstep does not match, show error message and kick them back to the previous page/flowstep.
+					this.snackBar.open("Please don't try to skip pages.", "Close", {
+                        duration: 3500,
+                        extraClasses: ['error-info']
+               		});
+
+					// Send user to the start (to prevent API errors)
+					this.route.navigate(['/step-02']);
+				}
+
+			}, (err) => {
+				console.log(err);
+
+				// If flowstep has error, log out the user (to prevent API errors)
+				this.data.logOut();
+			});
 	}
 
 }

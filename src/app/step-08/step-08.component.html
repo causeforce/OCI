@@ -43,7 +43,7 @@
 
 		</div>
 
-		<div class="border-bottom"></div>
+		<div class="border-btm"></div>
 
 		<div class="row search-row" *ngIf="tentSearch">
 			<h4>Search for a Tent Mate</h4>
@@ -57,7 +57,8 @@
 						[formControl]="emailFormControl" 
 						placeholder="Search by e-mail:" 
 						value="{{searchEmail}}" 
-						[(ngModel)]="searchEmail">
+						[(ngModel)]="searchEmail" 
+						(keyup.enter)="getTentingSearch()">
 					<button mat-button *ngIf="searchEmail" matSuffix mat-icon-button aria-label="Clear" (click)="searchEmail=''">
 					    <mat-icon>close</mat-icon>
 					</button>
@@ -74,7 +75,8 @@
 						matInput  
 						placeholder="Search by first name:" 
 						value="{{searchFirstName}}" 
-						[(ngModel)]="searchFirstName">
+						[(ngModel)]="searchFirstName" 
+						(keyup.enter)="getTentingSearch()">
 					<button mat-button *ngIf="searchFirstName" matSuffix mat-icon-button aria-label="Clear" (click)="searchFirstName=''">
 					    <mat-icon>close</mat-icon>
 					</button>
@@ -88,10 +90,11 @@
 			<div class="form-group col-12">
 				<mat-form-field class="mat-input">
 					<input 
-						matInput  
+						matInput 
 						placeholder="Search by last name:" 
 						value="{{searchLastName}}" 
-						[(ngModel)]="searchLastName">
+						[(ngModel)]="searchLastName" 
+						(keyup.enter)="getTentingSearch()">
 					<button mat-button *ngIf="searchLastName" matSuffix mat-icon-button aria-label="Clear" (click)="searchLastName=''">
 					    <mat-icon>close</mat-icon>
 					</button>
@@ -192,15 +195,15 @@
 						mat-raised-button 
 						color="accent" 
 						class="prev-btn" 
-						(click)="previous()">
+						(click)="previousFlowStep()">
 						Back
 					</button>
 					<button 
 						mat-raised-button 
 						color="primary" 
 						class="next-btn"
-						(click)="next()" 
-						[disabled]="!tentSearch">
+						(click)="nextFlowStep()" 
+						[disabled]="nextToggle">
 						Next
 					</button>
 				</div>

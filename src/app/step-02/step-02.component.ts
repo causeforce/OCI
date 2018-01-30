@@ -84,34 +84,19 @@ export class Step02Component implements OnInit {
 
 		} else if (this.dataService.storageToken === undefined) {
 			// console.log('Auth Token Expired.');
+			this.snackBar.open("Login session expired, please login again.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.router.navigate(['/step-01']);
 		} else {
 			// if not logged in, go back to step 1 (login page)
-			// console.log('You are not logged in, get outta here!');
+			this.snackBar.open("You are not logged in, please login.", "Close", {
+                duration: 3500,
+                extraClasses: ['error-info']
+            });
 			this.router.navigate(['/step-01']);
 		}
-
-		// if (this.firstName === undefined) {
-		// 	this.firstName = this.firstName;
-		// }
-		// if (this.dataService.liveLastName === undefined) {
-		// 	this.dataService.liveLastName = this.lastName;
-		// }
-		// if (this.dataService.liveAddress1 === undefined) {
-		// 	this.dataService.liveAddress1 = this.primaryAddress1;
-		// }
-		// if (this.dataService.liveAddress2 === undefined) {
-		// 	this.dataService.liveAddress2 = this.primaryAddress2;
-		// }
-		// if (this.dataService.liveCity === undefined) {
-		// 	this.dataService.liveCity = this.primaryCity;
-		// }
-		// if (this.dataService.liveState === undefined) {
-		// 	this.dataService.liveState = this.primaryState;
-		// }
-		// if (this.dataService.liveZip === undefined) {
-		// 	this.dataService.liveZip = this.primaryZip;
-		// }
 
 		if (this.consData.getConsResponse) {
 			
@@ -232,7 +217,9 @@ export class Step02Component implements OnInit {
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.updateUserResults = res;
-				this.router.navigate(['/step-03']);
+
+				this.updateFlowStepNext();
+				// this.router.navigate(['/step-03']);
 			}, (err) => {
 				console.log('There was an error getting the Participation Info:')
 				console.log(err);
@@ -274,11 +261,6 @@ export class Step02Component implements OnInit {
 			});
 	}
 
-	// Next Route
-	next() {
-		this.router.navigate(['/step-03']);
-	}
-
 	// Check Logged In State
 	isLoggedIn() {
 		return this.dataService.isLoggedIn();
@@ -290,6 +272,15 @@ export class Step02Component implements OnInit {
 		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
+			});
+	}
+
+	updateFlowStepNext() {
+		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.storageToken + '&flow_step=2' + '&response_format=json';
+		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
+			.subscribe(res => {
+				this.updateRegRes = res;
+				this.router.navigate(['/step-03']);
 			});
 	}
 }
