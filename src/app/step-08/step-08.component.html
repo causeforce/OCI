@@ -144,7 +144,7 @@
 
 				<div class="row" *ngFor="let res of tentingResults.getTentingSearchResponse.record">
 					<div class="col">
-						<a href="{{res.personalPageUrl}}">{{res.name.first}} {{res.name.last}}</a>
+						<a href="{{res.personalPageUrl}}" target="_blank">{{res.name.first}} {{res.name.last}}</a>
 					</div>
 <!-- 					<div class="col-md-4">
 						<p>{{res.tentmateStatus}}</p>
@@ -160,7 +160,9 @@
 
 				<div class="row" *ngIf="tentingResults.getTentingSearchResponse.record">
 					<div class="col">
-						<a href="{{tentingResults.getTentingSearchResponse.record.personalPageUrl}}">{{tentingResults.getTentingSearchResponse.record.name.first}} {{tentingResults.getTentingSearchResponse.record.name.last}}</a>
+						<a href="{{tentingResults.getTentingSearchResponse.record.personalPageUrl}}" target="_blank">
+							{{tentingResults.getTentingSearchResponse.record.name.first}} {{tentingResults.getTentingSearchResponse.record.name.last}}
+						</a>
 					</div>
 <!-- 					<div class="col-md-4">
 						<p>{{res.tentmateStatus}}</p>

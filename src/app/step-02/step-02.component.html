@@ -32,39 +32,41 @@
 					Team name: <span class="txt-blue">{{ dataService.teamName }}</span>
 				</label>
 			</div>
-			<div class="form-group">
-				<mat-form-field class="mat-input">
-					<input 
-						matInput 
-						required 
-						placeholder="First name:" 
-						value="{{firstName}}" 
-						[(ngModel)]="firstName" 
-						formControlName="firstName">
-					<button mat-button *ngIf="firstName" matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
-					    <mat-icon>close</mat-icon>
-					</button>
-					<mat-error *ngIf="step02Form.controls.firstName.invalid">
-				    	First name is <strong>required</strong>
-				    </mat-error>
-				</mat-form-field>
-			</div>
-			<div class="form-group">
-				<mat-form-field class="mat-input">
-					<input 
-						matInput 
-						required 
-						placeholder="Last name:" 
-						value="{{lastName}}" 
-						[(ngModel)]="lastName" 
-						formControlName="lastName">
-					<button mat-button *ngIf="lastName" matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
-					    <mat-icon>close</mat-icon>
-					</button>
-					<mat-error *ngIf="step02Form.controls.lastName.invalid">
-				    	Last name is <strong>required</strong>
-				    </mat-error>
-				</mat-form-field>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="First name:" 
+							value="{{firstName}}" 
+							[(ngModel)]="firstName" 
+							formControlName="firstName">
+						<button mat-button *ngIf="firstName" matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.firstName.invalid">
+					    	First name is <strong>required</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-group col-md-6">
+					<mat-form-field class="mat-input">
+						<input 
+							matInput 
+							required 
+							placeholder="Last name:" 
+							value="{{lastName}}" 
+							[(ngModel)]="lastName" 
+							formControlName="lastName">
+						<button mat-button *ngIf="lastName" matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
+						    <mat-icon>close</mat-icon>
+						</button>
+						<mat-error *ngIf="step02Form.controls.lastName.invalid">
+					    	Last name is <strong>required</strong>
+					    </mat-error>
+					</mat-form-field>
+				</div>
 			</div>
 			<div class="form-group">
 				<mat-form-field class="mat-input">

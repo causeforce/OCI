@@ -36,10 +36,6 @@ export class Step04Component implements OnInit {
 	flowStepResults:any={};
 	getFlowStepNumber:string;
 
-	// Health Insurance Variables (survey question ID(s))
-	healthInsNameID:string = '87000';
-	healthInsNumberID:string = '87001';
-
 	// Form Variables
 	healthForm: FormGroup;
 
@@ -86,13 +82,13 @@ export class Step04Component implements OnInit {
 	}
 
 	getSurveyRes() {
-		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.torontoID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.eventID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.surveyResults = res;
 
 				for (let data of this.surveyResults.getSurveyResponsesResponse.responses) {
-					if (data.questionId === this.healthInsNameID) {
+					if (data.questionId === this.data.question4) {
 						if (this.healthInsName === undefined || null) {
 							this.healthInsName = data.responseValue;
 						}
@@ -100,7 +96,7 @@ export class Step04Component implements OnInit {
 							this.healthInsName = '';
 						}
 					}
-					if (data.questionId === this.healthInsNumberID) {
+					if (data.questionId === this.data.question5) {
 
 						if (this.healthInsNumber === undefined || null) {
 							this.healthInsNumber = data.responseValue;
@@ -111,14 +107,17 @@ export class Step04Component implements OnInit {
 					}
 				}
 			}, (err) =>{
-				console.log(err);
+				this.snackBar.open("There was an an error while retrieving information.", "Close", {
+                    duration: 3500,
+                    extraClasses: ['error-info']
+               	});
 			});
 	}
 
 	updateSurveyRes() {
 
-		const question_87000 = '&question_'+ this.healthInsNameID + '=' + this.healthInsName;
-		const question_87001 = '&question_'+ this.healthInsNumberID + '=' + this.healthInsNumber;
+		const question_87000 = '&question_'+ this.data.question4 + '=' + this.healthInsName;
+		const question_87001 = '&question_'+ this.data.question5 + '=' + this.healthInsNumber;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
@@ -126,21 +125,23 @@ export class Step04Component implements OnInit {
 			.subscribe(res => {
 				this.surveyResults = res;
 				this.snackBar.open("Your information has been saved!", "Close", {
-                        duration: 3500,
-                        extraClasses: ['saved-info']
+                    duration: 3500,
+                    extraClasses: ['saved-info']
                 });
 
 				this.nextFlowStep();
-			}, 
-			error => {
-				console.log('There was an error');
+			}, (error) => {
+				this.snackBar.open("There was an error while trying to save your information.", "Close", {
+                    duration: 3500,
+                    extraClasses: ['error-info']
+               	});
 			});
 	}
 
 	updateSurveyResSave() {
 
-		const question_87000 = '&question_'+ this.healthInsNameID + '=' + this.healthInsName;
-		const question_87001 = '&question_'+ this.healthInsNumberID + '=' + this.healthInsNumber;
+		const question_87000 = '&question_'+ this.data.question4 + '=' + this.healthInsName;
+		const question_87001 = '&question_'+ this.data.question5 + '=' + this.healthInsNumber;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
@@ -152,9 +153,11 @@ export class Step04Component implements OnInit {
                         extraClasses: ['saved-info']
                 });
 				// window.location.reload();
-			}, 
-			error => {
-				console.log('There was an error');
+			}, (error) => {
+				this.snackBar.open("There was an error while trying to save your information.", "Close", {
+                    duration: 3500,
+                    extraClasses: ['error-info']
+               	});
 			});
 	}
 
@@ -164,13 +167,18 @@ export class Step04Component implements OnInit {
 
 	// Update the current Flowstep
 	updateFlowStep() {
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// console.log('Flow step updated.')
 			}, (err) => {
 				if (err) {
-					console.log('There was an error updating the flowstep.');
+					// console.log('There was an error updating the flowstep.');
+					this.snackBar.open("There was an unknown error.", "Close", {
+	                    duration: 3500,
+	                    extraClasses: ['error-info']
+	               	});
+					this.data.logOut();
 				}
 			});
 	}
@@ -178,14 +186,19 @@ export class Step04Component implements OnInit {
 	// Update the current Flowstep
 	nextFlowStep() {
 		this.flowStep = '4';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// Update the flowStep to the next flowstep once everything checks out properly
 				this.route.navigate(['/step-05']);
 			}, (err) => {
 				if (err) {
-					console.log('There was an error updating the flowstep.');
+					// console.log('There was an error updating the flowstep.');
+					this.snackBar.open("There was an unknown error.", "Close", {
+	                    duration: 3500,
+	                    extraClasses: ['error-info']
+	               	});
+					this.data.logOut();
 				}
 			});
 	}
@@ -193,14 +206,19 @@ export class Step04Component implements OnInit {
 	// Update the current Flowstep
 	previousFlowStep() {
 		this.flowStep = '2';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// console.log('Flow step updated.')
 				this.route.navigate(['/step-03']);
 			}, (err) => {
 				if (err) {
-					console.log('There was an error updating the flowstep.');
+					// console.log('There was an error updating the flowstep.');
+					this.snackBar.open("There was an unknown error.", "Close", {
+	                    duration: 3500,
+	                    extraClasses: ['error-info']
+	               	});
+					this.data.logOut();
 				}
 			});
 	}
@@ -208,7 +226,7 @@ export class Step04Component implements OnInit {
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ token;
+		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ token;
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;
@@ -232,8 +250,11 @@ export class Step04Component implements OnInit {
 				}
 
 			}, (err) => {
-				console.log(err);
-
+				// console.log(err);
+				this.snackBar.open("There was an unknown error.", "Close", {
+                    duration: 3500,
+                    extraClasses: ['error-info']
+               	});
 				this.data.logOut();
 			});
 	}

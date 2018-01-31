@@ -112,7 +112,7 @@ export class Step07Component implements OnInit {
 	// Gather Registration Information
 	getRegInfo() {
 		this.data.storageToken = localStorage.getItem('token');
-		this.data.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ this.data.storageToken;
+		this.data.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ this.data.storageToken;
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.regResponse = res;
@@ -202,7 +202,7 @@ export class Step07Component implements OnInit {
 				}
 
 				// Regular and Team Fundraising Logic (You would put OneWalk's Event ID here)
-				if (this.data.torontoID === '1641') {
+				if (this.data.eventID === '1641') {
 					if (this.inTeam === true) {
 						this.getTeam();
 					}
@@ -260,7 +260,7 @@ export class Step07Component implements OnInit {
 
 	// Gather Survery Results 
 	getSurvey() {
-		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.torontoID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.eventID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.surveyResults = res;
@@ -295,7 +295,7 @@ export class Step07Component implements OnInit {
 
 	// Get Team Information
 	getTeam() {
-		this.method = 'CRTeamraiserAPI?method=getTeam&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ this.data.storageToken;
+		this.method = 'CRTeamraiserAPI?method=getTeam&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ this.data.storageToken;
 		this.http.post(this.data.convioURL + this.method, null)
 			.subscribe(res => {
 				this.getTeamRes = res;
@@ -314,7 +314,7 @@ export class Step07Component implements OnInit {
 		const checkComplete = 'complete';
 
 		// Filters for the API Call to get the Participants with completed status
-		const filters = '&fr_id='+ this.data.torontoID + '&sso_auth_token='+ this.data.storageToken +'&team_name='+ this.teamName + '&list_filter_column=reg.CHECKIN_STATUS'+ '&list_filter_text=' + checkComplete +'&list_page_size=500';
+		const filters = '&fr_id='+ this.data.eventID + '&sso_auth_token='+ this.data.storageToken +'&team_name='+ this.teamName + '&list_filter_column=reg.CHECKIN_STATUS'+ '&list_filter_text=' + checkComplete +'&list_page_size=500';
 		this.method = 'CRTeamraiserAPI?method=getParticipants&api_key=cfrca&v=1.0&response_format=json';
 
 		// Get call to get all the participants with the completed Status
@@ -417,7 +417,7 @@ export class Step07Component implements OnInit {
 
 	// Update the current Flowstep
 	updateFlowStep() {
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// console.log('Flow step updated.')
@@ -431,7 +431,7 @@ export class Step07Component implements OnInit {
 	// Update the flowStep to the next flowStep once everything checks out
 	nextFlowStep() {
 		this.flowStep = '7';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// Update the flowStep to the next flowstep once everything checks out properly
@@ -446,7 +446,7 @@ export class Step07Component implements OnInit {
 	// Update the current Flowstep
 	previousFlowStep() {
 		this.flowStep = '5';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 
@@ -462,7 +462,7 @@ export class Step07Component implements OnInit {
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ token;
+		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ token;
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;

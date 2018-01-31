@@ -152,7 +152,7 @@ export class Step03Component implements OnInit {
 
 	// Get the Survey Responses
 	getSurveyRes() {
-		this.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.ssoToken + '&survey_id=82857' + '&response_format=json';
+		this.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&survey_id=82857' + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.surveyResults = res;
@@ -161,7 +161,7 @@ export class Step03Component implements OnInit {
 				for (let res of this.surveyResults.getSurveyResponsesResponse.responses) {
 
 					// Cancer Survivor
-					if (res.questionId === '87010') {
+					if (res.questionId === this.dataService.question14) {
 						if (this.cancerRes === undefined) {
 							this.cancerRes = res.responseValue;
 						}
@@ -171,7 +171,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Vegetarian Meals
-					if (res.questionId === '87011') {
+					if (res.questionId === this.dataService.question14) {
 						if (this.vegRes === undefined) {
 							this.vegRes = res.responseValue;
 						}
@@ -180,8 +180,8 @@ export class Step03Component implements OnInit {
 						}
 					}
 
-					// Attended Event (How many years attended event)
-					if (res.questionId === '86997') {
+					// How many years have you ridden with The Ride? 
+					if (res.questionId === this.dataService.question1) {
 						this.attendenceRes = res.responseValue;
 						if (this.attendenceRes === undefined || null) {
 							this.attendenceRes = '';
@@ -192,7 +192,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Jersey Selection
-					if (res.questionId === '87014') {
+					if (res.questionId === this.dataService.question18) {
 
 						if (this.jerseyRes === '[object Object]') {
 							console.log('jersey empty object');
@@ -208,7 +208,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Shuttle 1 Selection
-					if (res.questionId === '87015') {
+					if (res.questionId === this.dataService.question19) {
 						this.shuttleRes = res.responseValue;
 						if (this.shuttleRes === undefined || null) {
 							this.shuttleRes = res.responseValue;
@@ -219,7 +219,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Shuttle 2 Selection
-					if (res.questionId === '87019') {
+					if (res.questionId === this.dataService.question20) {
 						this.shuttleRes2 = res.responseValue;
 						if (this.shuttleRes2 === undefined || null) {
 							this.shuttleRes2 = res.responseValue;
@@ -230,7 +230,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Route Selection
-					if (res.questionId === '87021') {
+					if (res.questionId === this.dataService.question25) {
 						this.routeRes = res.responseValue;
 						if (res.responseValue === '[object Object]') {
 							this.routeRes = '';
@@ -245,7 +245,7 @@ export class Step03Component implements OnInit {
 					}
 
 					// Experienced Rider
-					if (res.questionId === '87022') {
+					if (res.questionId === this.dataService.question26) {
 						this.experiencedRiderRes = res.responseValue;
 						if (this.experiencedRiderRes === undefined || null) {
 							this.experiencedRiderRes = res.responseValue;
@@ -258,18 +258,18 @@ export class Step03Component implements OnInit {
 	// Update the Survey Responses
 	updateSurveyRes() {
 
-		const updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=1641&survey_id=' + this.dataService.surveyID;
+		const updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.eventID + '&survey_id=' + this.dataService.surveyID;
 
-		const question_86997 = '&question_86997=' + this.attendenceRes;
-		const question_87010 = '&question_87010=' + this.cancerRes;
-		const question_87011 = '&question_87011=' + this.vegRes;
-		const question_87014 = '&question_87014=' + this.jerseyRes;
-		const question_87015 = '&question_87015=' + this.shuttleRes;
-		const question_87019 = '&question_87019=' + this.shuttleRes2;
-		const question_87021 = '&question_87021=' + this.routeRes;
-		const question_87022 = '&question_87022=' + this.experiencedRiderRes;
+		const question_attendence = '&question_'+ this.dataService.question1 +'=' + this.attendenceRes;
+		const question_cancer = '&question_'+ this.dataService.question14 +'=' + this.cancerRes;
+		const question_veg = '&question_'+ this.dataService.question11 +'=' + this.vegRes;
+		const question_jersey = '&question_'+ this.dataService.question18 +'=' + this.jerseyRes;
+		const question_shuttle1 = '&question_'+ this.dataService.question19 +'=' + this.shuttleRes;
+		const question_shuttle2 = '&question_'+ this.dataService.question20 +'=' + this.shuttleRes2;
+		const question_route = '&question_'+ this.dataService.question25 +'=' + this.routeRes;
+		const question_safety_rider = '&question_'+ this.dataService.question26 +'=' + this.experiencedRiderRes;
 
-		this.http.post(updateSurveyResponsesUrl + question_86997 + question_87010 + question_87011 + question_87014 + question_87015 + question_87019 + question_87021 + question_87022 + '&sso_auth_token=' + this.dataService.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
 			.subscribe(res => {
 				// console.log(res);
 				this.updateReg();
@@ -297,20 +297,24 @@ export class Step03Component implements OnInit {
 			this.routeRes = '';
 		}
 
-		const updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=1641&survey_id=' + this.dataService.surveyID;
+		const updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.eventID + '&survey_id=' + this.dataService.surveyID;
 
-		const question_86997 = '&question_86997=' + this.attendenceRes;
-		const question_87010 = '&question_87010=' + this.cancerRes;
-		const question_87011 = '&question_87011=' + this.vegRes;
-		const question_87014 = '&question_87014=' + this.jerseyRes;
-		const question_87015 = '&question_87015=' + this.shuttleRes;
-		const question_87019 = '&question_87019=' + this.shuttleRes2;
-		const question_87021 = '&question_87021=' + this.routeRes;
-		const question_87022 = '&question_87022=' + this.experiencedRiderRes;
+		const question_attendence = '&question_'+ this.dataService.question1 +'=' + this.attendenceRes;
+		const question_cancer = '&question_'+ this.dataService.question14 +'=' + this.cancerRes;
+		const question_veg = '&question_'+ this.dataService.question11 +'=' + this.vegRes;
+		const question_jersey = '&question_'+ this.dataService.question18 +'=' + this.jerseyRes;
+		const question_shuttle1 = '&question_'+ this.dataService.question19 +'=' + this.shuttleRes;
+		const question_shuttle2 = '&question_'+ this.dataService.question20 +'=' + this.shuttleRes2;
+		const question_route = '&question_'+ this.dataService.question25 +'=' + this.routeRes;
+		const question_safety_rider = '&question_'+ this.dataService.question26 +'=' + this.experiencedRiderRes;
 
-		this.http.post(updateSurveyResponsesUrl + question_86997 + question_87010 + question_87011 + question_87014 + question_87015 + question_87019 + question_87021 + question_87022 + '&sso_auth_token=' + this.dataService.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
 			.subscribe(res => {
-				this.updateReg();
+				// this.updateReg();
+				this.snackBar.open("Your information has been saved!", "Close", {
+                        duration: 3500,
+                        extraClasses: ['saved-info']
+                });
 			}, 
 			(error) => {
 				console.log(error);
@@ -334,7 +338,7 @@ export class Step03Component implements OnInit {
 
 		this.flowStep = '3';
 
-		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&emergency_name=' + this.dataService.emergencyName + '&emergency_phone=' + this.dataService.emergencyPhone + '&response_format=json';
+		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&emergency_name=' + this.dataService.emergencyName + '&emergency_phone=' + this.dataService.emergencyPhone + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.method, null) 
 			.subscribe(res => {
 				this.snackBar.open("Your information has been saved!", "Close", {
@@ -344,15 +348,10 @@ export class Step03Component implements OnInit {
 			});
 	}
 
-	// Previous Route
-	previous() {
-		this.route.navigate(['/step-02']);
-	}
-
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.torontoID + '&sso_auth_token='+ token;
+		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.eventID + '&sso_auth_token='+ token;
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;
@@ -375,6 +374,11 @@ export class Step03Component implements OnInit {
 			}, (err) => {
 				console.log(err);
 			});
+	}
+
+	// Go to previous route
+	previous() {
+		this.route.navigate(['/step-02'])
 	}
 
 }

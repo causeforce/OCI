@@ -128,7 +128,6 @@ export class Step02Component implements OnInit {
 			liveZip: new FormControl(this.primaryZip, Validators.required),
 			genderSelect: new FormControl(this.gender, Validators.required)
 		});
-
 		
 	}
 
@@ -137,7 +136,7 @@ export class Step02Component implements OnInit {
 	
 	// Update the checkInStatus from Registration
 	updateCheckInStatus() {
-		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.ssoToken + '&checkin_status=' + this.checkInStatus + '&response_format=json';
+		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&checkin_status=' + this.checkInStatus + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
@@ -147,7 +146,7 @@ export class Step02Component implements OnInit {
 	// Gather Registration Information
 	getRegInfo() {
 		this.dataService.storageToken = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.torontoID + '&sso_auth_token='+ this.dataService.storageToken;
+		this.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.dataService.eventID + '&sso_auth_token='+ this.dataService.storageToken;
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.dataService.regResponse = res;
@@ -268,7 +267,7 @@ export class Step02Component implements OnInit {
 
 	// Update the Flow Step
 	updateFlowStep() {
-		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
@@ -276,7 +275,7 @@ export class Step02Component implements OnInit {
 	}
 
 	updateFlowStepNext() {
-		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.torontoID + '&sso_auth_token=' + this.dataService.storageToken + '&flow_step=2' + '&response_format=json';
+		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.storageToken + '&flow_step=2' + '&response_format=json';
 		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;

@@ -68,13 +68,14 @@ export class Step09Component implements OnInit {
 
 	// Get the Survey Responses
 	getSurveyRes() {
-		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&survey_id=82857' + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&survey_id=82857' + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.surveyResults = res;
 
+				// Accepted Upsell Offer (for Pre-register question)
 				for (let result of this.surveyResults.getSurveyResponsesResponse.responses) {
-					if (result.questionId === '87002') {
+					if (result.questionId === this.data.question6) {
 						this.preReg = result.responseValue;
 					}
 				}
@@ -99,7 +100,7 @@ export class Step09Component implements OnInit {
 
 	// Set checkInStatus as Complete
 	updateCheckInStatusComplete() {
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&checkin_status=complete' + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&checkin_status=complete' + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
@@ -111,7 +112,7 @@ export class Step09Component implements OnInit {
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ token;
+		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ token;
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;

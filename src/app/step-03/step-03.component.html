@@ -24,7 +24,7 @@
 						(keyup.enter)="updateReg()" 
 						required  
 						matInput 
-						placeholder="* Emergency Contact Name:" 
+						placeholder="Emergency Contact Name:" 
 						value="{{dataService.emergencyName}}" 
 						formControlName="emergencyName" 
 						[(ngModel)]="dataService.emergencyName">
@@ -46,7 +46,7 @@
 						required 
 						type="tel" 
 						minlength="5" 
-						placeholder="* Emergency Contact Phone #:" 
+						placeholder="Emergency Contact Phone #:" 
 						value="{{dataService.emergencyPhone}}" 
 						formControlName="emergencyPhone" 
 						[(ngModel)]="dataService.emergencyPhone">
@@ -65,7 +65,7 @@
 			<div class="survey-res" *ngFor="let res of surveyResults.getSurveyResponsesResponse.responses">
 
 				<!-- Cancer Survivor -->
-				<div class="form-group" *ngIf="res.questionId === '87010'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question14">
 					<p>The Ride uses a yellow flag and stickers to identify cancer survivors. If you are a cancer survivor or are battling cancer at this time and would like to be recognized, please select an option below.</p>
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-form-field>
@@ -82,7 +82,7 @@
 				</div>
 
 				<!-- Veg Meals -->
-				<div class="form-group" *ngIf="res.questionId === '87011'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question15">
 					<p>If you require a vegetarian meal please select an option below. Gluten free options will be available at every meal/snack area.</p>
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-form-field>
@@ -99,7 +99,7 @@
 				</div>
 
 				<!-- Jersey sizes -->
-				<div class="form-group" *ngIf="res.questionId === '87014'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question18">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-form-field>
 						<mat-select formControlName="jerseySizes" class="mat-select" placeholder="Jersey Size" [(ngModel)]="jerseyRes">
@@ -114,7 +114,7 @@
 				</div>
 
 				<!-- Shuttle -->
-				<div class="form-group" *ngIf="res.questionId === '87015'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question19">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-form-field>
 						<mat-select formControlName="shuttle1" class="mat-select" placeholder="Shuttle Selection" [(ngModel)]="shuttleRes">
@@ -129,7 +129,7 @@
 				</div>
 				
 				<!-- Shuttle 2-->
-				<div class="form-group" *ngIf="res.questionId === '87019'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question20">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-form-field>
 						<mat-select formControlName="shuttle2" class="mat-select" placeholder="Shuttle Selection" [(ngModel)]="shuttleRes2">
@@ -144,7 +144,7 @@
 				</div>
 				
 				<!-- Years attended -->
-				<div class="form-group" *ngIf="res.questionId === '86997'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question1">
 					<p><strong>{{res.questionText}}</strong></p>
 					<mat-form-field>
 						<mat-select class="mat-select" placeholder="Years Attended" [(ngModel)]="attendenceRes" formControlName="yearsAttended">
@@ -165,7 +165,7 @@
 			<!-- Route Selection -->
 			<div class="survey-res" *ngFor="let res of surveyResults.getSurveyResponsesResponse.responses">
 				
-				<div class="form-group" *ngIf="res.questionId === '87021'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question25">
 					<p>
 						<strong>Please select a route*:</strong>
 					</p>
@@ -184,10 +184,10 @@
 
 			<div class="border-btm"></div>
 			
-			<!-- Experienced Rider -->
+			<!-- Safety Rider -->
 			<div class="survey-res" *ngFor="let res of surveyResults.getSurveyResponsesResponse.responses">
 			
-				<div class="form-group" *ngIf="res.questionId === '87022'">
+				<div class="form-group" *ngIf="res.questionId === dataService.question26">
 					<p>
 						<strong>Are you an experienced Rider?</strong>
 						We are looking for Riders like you to join our Rider Safety Team! These leaders will help us maintain rules of the road and ensure that cycling etiquette is upheld throughout the event. Members of the Rider Safety Team still take part in all of the fun of The Ride - but just keep an eye out for other Riders, encourage safe riding, and assist if needed. To sign up for our Rider Safety Team, please answer the question below or call the local office at (888) 771-BIKE (2453)!
@@ -206,7 +206,7 @@
 						</mat-radio-button>
 					</mat-radio-group>
 				</div>
-				
+
 			</div>
 
 		</form>

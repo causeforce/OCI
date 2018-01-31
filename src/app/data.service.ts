@@ -11,6 +11,51 @@ export class DataService {
 
 	/* ============  Global Variables Below ============*/
 
+	// Event ID
+	eventID:any = '1641';
+
+	// Survey ID 
+	surveyID:any = '82857';
+
+	// Survey Question ID(s) - below insert the Survey Question IDs
+	question1:string = '86997'; // How many years have you ridden with The Ride? 
+	question2:string = '86998'; // Waiver and Release Full Name 
+	question3:string = '86999'; // 18 Years Check Box 
+	
+	question4:string = '87000'; // Health Insurance Company name 
+	question5:string = '87001'; // Health Insurance Policy Number 
+	
+	question6:string = '87002'; // Accepted Upsell Offer 
+	question7:string = '87003'; // Donation Form Type 
+	question8:string = '87004'; // DSP Save Value 
+	
+	question9:string = '87005'; // Citizenship 
+	question10:string = '87006'; // Passport # 
+
+	question11:string = '87007'; // Birth Month 
+	question12:string = '87008'; // Birth Day 
+	question13:string = '87009'; // Birth Year 
+
+	question14:string = '87010'; // Want to be recognized as a cancer survivor? 
+	question15:string = '87011'; // Vegetarian meal 
+
+	question16:string = '87012'; // Hidden Upsell Value 
+	question17:string = '87013'; // Hidden Safety Video Watched 
+	
+	question18:string = '87014'; // Jersey Size 
+
+	question19:string = '87015'; // Shuttle Question 1
+	question20:string = '87016'; // Shuttle Question 2
+	question21:string = '87017'; // Shuttle Question 3
+	question22:string = '87018'; // Shuttle Question 4
+	question23:string = '87019'; // Shuttle Question 5
+	
+	question24:string = '87020'; // Bike Transport
+
+	// Extra Survey Questions
+	question25:string = '87021'; // Route Number 
+	question26:string = '87022'; // Safety Rider 
+
 	// Login Information
  	username:string;
 	password:string;
@@ -103,13 +148,6 @@ export class DataService {
 	cancerRes:string;
 	vegRes:string;
 
-	// Survey ID 
-	surveyID:any = '82857';
-
-	// Event ID
-	eventID:any = '1641';
-	torontoID:string = '1641';
-
 	show:boolean = true;
 
 	// Tentmate Status Variable
@@ -198,7 +236,7 @@ export class DataService {
 	// Get the current Flowstep and Send them to the route
 	getFlowStepLogin() {
 		const token = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.torontoID + '&sso_auth_token='+ this.ssoToken;
+		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.ssoToken;
 		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;
@@ -240,7 +278,7 @@ export class DataService {
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.torontoID + '&sso_auth_token='+ this.ssoToken;
+		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.ssoToken;
 		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;
@@ -252,7 +290,7 @@ export class DataService {
 
 	// Update the current Flowstep
 	updateFlowStep() {
-		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.torontoID + '&sso_auth_token=' + this.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.eventID + '&sso_auth_token=' + this.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.convioURL + this.method, null) 
 			.subscribe(res => {
 				this.updateRegRes = res;
@@ -264,7 +302,7 @@ export class DataService {
 	// Gather Registration Information
 	getRegInfo() {
 		this.storageToken = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.torontoID + '&sso_auth_token='+ this.storageToken;
+		this.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.storageToken;
 		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
 				this.regResponse = res;

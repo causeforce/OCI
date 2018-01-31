@@ -37,22 +37,10 @@ export class Step05Component implements OnInit {
 	videoWatched:boolean = false;
 	scrolledBottom:boolean = false;
 
-	// Survey Question ID(s)
-	videoWatchedQID:string = '87013';
-	ageQID:string = '86999';
-	waiverNameQID:string = '86998';
-
 	// Survey results
 	surveyResults:any={};
 
-	
-
-
-	constructor(private data: DataService, private http: HttpClient, private route: Router, public snackBar: MatSnackBar) {
-
-		// console.log(this.ageResponse);
-
-	}
+	constructor(private data: DataService, private http: HttpClient, private route: Router, public snackBar: MatSnackBar) {}
 
 	ngOnInit() {
 
@@ -111,7 +99,7 @@ export class Step05Component implements OnInit {
 	}
 
 	getSurveyRes() {
-		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.torontoID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=getSurveyResponses&api_key=cfrca&v=1.0&fr_id=' + this.data.eventID + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.surveyResults = res;
@@ -120,7 +108,9 @@ export class Step05Component implements OnInit {
 				// For loop to loop through the responded data from API call
 				for (let data of this.surveyResults.getSurveyResponsesResponse.responses) {
 					// If questionId is same as waiver question ID in Survey then check if fullName variable is undefined or null, if so set it as the response value else if it's length is equil to 0 or no reponseValue, then set it to a blank string
-					if (data.questionId === this.waiverNameQID) {
+
+					// Waiver and Release Full Name 
+					if (data.questionId === this.data.question2) {
 						if (this.fullName === undefined || null) {
 							this.fullName = data.responseValue;
 						}
@@ -129,20 +119,8 @@ export class Step05Component implements OnInit {
 						}
 					}
 
-					if (data.questionId === this.videoWatchedQID) {
-						if (this.videoResponse === undefined || null) {
-							this.videoResponse = data.responseValue;
-						}
-						if (Object.keys(data.responseValue).length === 0) {
-							this.videoResponse = 'No';
-						}
-						if (data.responseValue === 'Yes') {
-							this.videoWatched = true;
-						}
-					}
-
-					if (data.questionId === this.ageQID) {
-						// Same as above
+					// 18 Years Check Box 
+					if (data.questionId === this.data.question3) {
 						if (this.ageResponseVal === undefined || null) {
 							this.ageResponseVal = data.responseValue;
 						}
@@ -157,6 +135,19 @@ export class Step05Component implements OnInit {
 						}
 						if (data.responseValue === 'No') {
 							this.ageResponse = false;
+						}
+					}
+
+					// Hidden Safety Video Watched 
+					if (data.questionId === this.data.question17) {
+						if (this.videoResponse === undefined || null) {
+							this.videoResponse = data.responseValue;
+						}
+						if (Object.keys(data.responseValue).length === 0) {
+							this.videoResponse = 'No';
+						}
+						if (data.responseValue === 'Yes') {
+							this.videoWatched = true;
 						}
 					}
 				}
@@ -175,13 +166,13 @@ export class Step05Component implements OnInit {
 
 	updateSurveyRes() {
 
-		const question_87013 = '&question_'+ this.videoWatchedQID + '=' + this.videoResponse;
-		const question_86999 = '&question_'+ this.ageQID + '=' + this.ageResponseVal;
-		const question_86998 = '&question_'+ this.waiverNameQID + '=' + this.fullName;
+		const question_video = '&question_'+ this.data.question17 + '=' + this.videoResponse;
+		const question_age = '&question_'+ this.data.question3 + '=' + this.ageResponseVal;
+		const question_waiver= '&question_'+ this.data.question2 + '=' + this.fullName;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
-		this.http.post(updateSurveyResponsesUrl + question_87013 + question_86999 + question_86998 + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_video + question_age + question_waiver + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
 			.subscribe(res => {
 				this.surveyResults = res;
 
@@ -200,15 +191,14 @@ export class Step05Component implements OnInit {
 
 	updateSurveyResSave() {
 
-		const question_87013 = '&question_'+ this.videoWatchedQID + '=' + this.videoResponse;
-		const question_86999 = '&question_'+ this.ageQID + '=' + this.ageResponseVal;
-		const question_86998 = '&question_'+ this.waiverNameQID + '=' + this.fullName;
+		const question_video = '&question_'+ this.data.question17 + '=' + this.videoResponse;
+		const question_age = '&question_'+ this.data.question3 + '=' + this.ageResponseVal;
+		const question_waiver = '&question_'+ this.data.question2 + '=' + this.fullName;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
-		this.http.post(updateSurveyResponsesUrl + question_87013 + question_86999 + question_86998 + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_video + question_age + question_waiver + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
 			.subscribe(res => {
-				console.log(res);
 				this.surveyResults = res;
 
 				this.snackBar.open("Your information has been saved!", "Close", {
@@ -219,10 +209,6 @@ export class Step05Component implements OnInit {
 			error => {
 				console.log('There was an error');
 			});
-	}
-
-	previous() {
-		this.route.navigate(['/step-04']);
 	}
 
 	checkRes() {
@@ -236,7 +222,7 @@ export class Step05Component implements OnInit {
 
 	// Update the current Flowstep
 	updateFlowStep() {
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// console.log('Flow step updated.')
@@ -250,7 +236,7 @@ export class Step05Component implements OnInit {
 	// Update the flowStep to the next flowStep once everything checks out
 	nextFlowStep() {
 		this.flowStep = '5';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 				// Update the flowStep to the next flowstep once everything checks out properly
@@ -265,7 +251,7 @@ export class Step05Component implements OnInit {
 	// Update the current Flowstep
 	previousFlowStep() {
 		this.flowStep = '3';
-		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.torontoID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
 		this.http.post(this.data.convioURL + this.data.method, null) 
 			.subscribe(res => {
 
@@ -281,7 +267,7 @@ export class Step05Component implements OnInit {
 	// Get the current Flowstep
 	getFlowStep() {
 		const token = localStorage.getItem('token');
-		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.torontoID + '&sso_auth_token='+ token;
+		this.data.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.data.eventID + '&sso_auth_token='+ token;
 		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				this.flowStepResults = res;
