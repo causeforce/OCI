@@ -2,7 +2,9 @@
 
 This web application was created for participants of "The Ride" - www.conquercancer.ca
 
-# Below are Angular CLI Commands 
+# Angular CLI Commands 
+
+Below you will find helpful Angular CLI Commands we have used on this project.
 
 ## Development server
 
