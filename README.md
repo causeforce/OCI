@@ -5,7 +5,7 @@ This web application was created for participants of "The Ride" - www.conquercan
 ## Author & Coding Ninja: 
 Moe Quraishi (mquraishi@causeforce.com)
 
-## For more information visit http://www.conquercancer.ca
+For more information visit http://www.conquercancer.ca
 
 # Below are Angular CLI Commands 
 
@@ -20,6 +20,14 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+Run `ng build --watch` to watch for constant changes and build the project on the fly.
+
+For production build:
+
+Run `ng build --env=prod` to build for production.
+
+Run `ng build --env=prod --watch` to build for production on the fly.
 
 ## Running unit tests
 
