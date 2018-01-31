@@ -1,6 +1,13 @@
-# AngularOci
+# Online Check-in for ConquerCancer.ca
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
+This web application was created for participants of "The Ride" - www.conquercancer.ca
+
+## Author & Coding Ninja: 
+Moe Quraishi (mquraishi@causeforce.com)
+
+## For more information visit http://www.conquercancer.ca
+
+# Below are Angular CLI Commands 
 
 ## Development server
 

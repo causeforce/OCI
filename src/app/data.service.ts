@@ -110,16 +110,6 @@ export class DataService {
 	eventID:any = '1641';
 	torontoID:string = '1641';
 
-	// Locale
-	localeFr:boolean = false;
-	localeEn:boolean = true;
-
-	montrealLocale:boolean = true;
-
-	// LocalStorage Locale Variables
-	storageLocaleEN:boolean = true;
-	storageLocaleFR:boolean = false;
-
 	show:boolean = true;
 
 	// Tentmate Status Variable
@@ -131,73 +121,14 @@ export class DataService {
 			this.tokenExpired = false;
 		}
 
- 		// If the toggleLocaleMenu() returns false, don't show the locale menu
- 		if (this.toggleLocaleMenu() === false) {
- 			this.show = false;
- 		}
- 		// If the toggleLocaleMenu() returns null, show the locale menu
- 		if (this.toggleLocaleMenu() === null) {
- 			this.show = true;
- 		}
  		// If user's logged in state returns true set login state, and add constiuent ID from the the local storage into a global variable
  		if (this.isLoggedIn() === true) {
  			this.isloggedIn = true;
  			this.storageConsID = localStorage.getItem('consID');
  			this.storageParticipationID = localStorage.getItem('participationID');
- 			
  		}
- 		// Begin Locale if statements
- 		if (JSON.parse(localStorage.getItem('localeEN')) === true) {
- 			this.storageLocaleEN = true;
- 			this.storageLocaleFR = false;
- 		}
- 		if (JSON.parse(localStorage.getItem('localeEN')) === null) {
- 			this.storageLocaleEN = false;
- 			this.storageLocaleFR = false;
- 		}
- 		if (JSON.parse(localStorage.getItem('localeFR')) === true) {
- 			this.storageLocaleFR = true;
- 			this.storageLocaleEN = false;
- 		}
- 		if (JSON.parse(localStorage.getItem('localeFR')) === null) {
- 			this.storageLocaleFR = false;
- 			this.storageLocaleEN = false;
- 		}
- 		// End Locale if statements
+ 
  	}
-	
-	ngFirstName(event: any) {
-	    this.liveFirstName = event.target.value;
-	}
-
-	ngLastName(event: any) {
-		this.liveLastName = event.target.value;
-	}
-
- 	// Show or Hide the Locale Menu
- 	toggleLocaleMenu() {
- 		return JSON.parse(localStorage.getItem('showLocale'));
- 	}
-
- 	// Setting Locale for English text
- 	setLocaleEn() {
-		// this.localeFr = false;
-		// this.localeEn = true;
-		localStorage.setItem('showLocale', 'false');
-		localStorage.setItem('localeEN', 'true');
-		localStorage.setItem('localeFR', 'false');
-		this.show = false;
-	}
-
-	// Setting Locale for French text
-	setLocaleFr() {
-		// this.localeFr = false;
-		// this.localeEn = true;
-		localStorage.setItem('showLocale', 'false');
-		localStorage.setItem('localeEN', 'false');
-		localStorage.setItem('localeFR', 'true');
-		this.show = false;
-	}
 
 	// Retrieve a Survey based on Survey ID and Auth Token
  	getSurvey() {

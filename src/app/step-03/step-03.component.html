@@ -16,10 +16,6 @@
 	</div>
 	<div class="row" *ngIf="surveyResults.getSurveyResponsesResponse">
 
-<!-- 		<div class="form-container" *ngIf="!surveyResults">
-			<mat-spinner></mat-spinner>
-		</div> -->
-
 		<form class="form-container" [formGroup]="step03Form" *ngIf="step03Form">
 
 			<div class="form-group">
@@ -150,14 +146,6 @@
 				<!-- Years attended -->
 				<div class="form-group" *ngIf="res.questionId === '86997'">
 					<p><strong>{{res.questionText}}</strong></p>
-<!-- 					<mat-form-field class="mat-input">
-						<input 
-						(keyup.enter)="updateSurveyRes()" 
-						matInput 
-						placeholder="Years attended: {{attendenceRes}}" 
-						value="{{attendenceRes}}" 
-						[(ngModel)]="attendenceRes">
-					</mat-form-field> -->
 					<mat-form-field>
 						<mat-select class="mat-select" placeholder="Years Attended" [(ngModel)]="attendenceRes" formControlName="yearsAttended">
 						  	<p class="change-txt">
@@ -218,7 +206,7 @@
 						</mat-radio-button>
 					</mat-radio-group>
 				</div>
-
+				
 			</div>
 
 		</form>

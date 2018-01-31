@@ -49,23 +49,8 @@ export class Step01Component implements OnInit {
 
 	@Input() isVisible : boolean = true;
 	
-	// Setting locale by running the setLocaleEn() function in the data service then reloading
-	setLocaleEN() {
-		this.dataService.setLocaleEn();
-		window.location.reload();
-	}
-	// Setting locale by running the setLocaleFr() function in the data service then reloading
-	setLocaleFR() {
-		this.dataService.setLocaleFr();
-		window.location.reload();
-	}
 	// Calling on the isLoggedIn() function from the global data service to check the logged in state
 	isLoggedIn() {
 		return this.dataService.isLoggedIn();
 	}
-	// Show or hide the locale buttons or menu
-	showLocale() {
-		return this.dataService.toggleLocaleMenu();
-	}
-
 }
