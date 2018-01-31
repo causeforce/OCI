@@ -17,6 +17,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+You may also run `ng g c YOUR-COMPONENT-NAME` to generate a new coponent. Add `--no-spec` flag after `YOUR-COMPONENT-NAME` if you do not require a spec/testing file to be included.
+
+Other commands include:
+
+Run `ng g s YOUR-SERVICE-NAME` as a shorthand to generate services on the fly. You may also add the `--no-spec` flag to generate the service without a testing/spec file. 
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
