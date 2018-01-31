@@ -47,7 +47,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 You may also contact the development team at CauseForce for further help.
 
-## Author & Coding Ninja: 
+## Developed By: 
 Moe Quraishi (mquraishi@causeforce.com)
 
-For more information visit http://www.conquercancer.ca
+For more information about CauseForce visit http://www.causeforce.com/
+
+For more information about "The Ride" visit http://www.conquercancer.ca
