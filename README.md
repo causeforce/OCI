@@ -27,7 +27,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng build --watch` to watch for constant changes and build the project on the fly.
 
-For production build:
+### For production build:
 
 Run `ng build --env=prod` to build for production.
 
