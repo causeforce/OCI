@@ -2,11 +2,6 @@
 
 This web application was created for participants of "The Ride" - www.conquercancer.ca
 
-## Author & Coding Ninja: 
-Moe Quraishi (mquraishi@causeforce.com)
-
-For more information visit http://www.conquercancer.ca
-
 # Below are Angular CLI Commands 
 
 ## Development server
@@ -46,3 +41,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+You may also contact the development team at CauseForce for further help.
+
+## Author & Coding Ninja: 
+Moe Quraishi (mquraishi@causeforce.com)
+
+For more information visit http://www.conquercancer.ca
