@@ -75,13 +75,20 @@ export class Step05Component implements OnInit {
 			ageResponse: new FormControl('', Validators.required)
 		});
 
-
-
 	}
 
 	waiverScroll() {
 		if (this.waiverText.nativeElement.scrollTop >= 950) {
 			this.scrolledBottom = true;
+		}
+	}
+
+	// Function to prevent user from seeking the video
+	seekingVideo(event) {
+		const currentTime = 0;
+
+		if (currentTime < event.target.currentTime) {
+			event.target.currentTime = currentTime;
 		}
 	}
 

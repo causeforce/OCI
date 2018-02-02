@@ -1,6 +1,6 @@
 # Online Check-in for ConquerCancer.ca
 
-This web application was created for participants of "The Ride" - www.conquercancer.ca
+This web application was created for participants of "The Ride to Conquer Cancer" - www.conquercancer.ca
 
 # Angular CLI Commands 
 
@@ -53,4 +53,4 @@ Moe Quraishi, Front-end / MEAN Stack Developer
 
 For more information about CauseForce visit http://www.causeforce.com/
 
-For more information about "The Ride" visit http://www.conquercancer.ca
+For more information on "The Ride to Conquer Cancer" visit http://www.conquercancer.ca

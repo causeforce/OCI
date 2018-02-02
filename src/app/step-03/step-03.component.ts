@@ -376,6 +376,26 @@ export class Step03Component implements OnInit {
 			});
 	}
 
+	// Update the current Flowstep
+	previousFlowStep() {
+		this.flowStep = '1';
+		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
+		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
+			.subscribe(res => {
+				// console.log('Flow step updated.')
+				this.previous();
+			}, (err) => {
+				if (err) {
+					// console.log('There was an error updating the flowstep.');
+					this.snackBar.open("There was an unknown error.", "Close", {
+	                    duration: 3500,
+	                    extraClasses: ['error-info']
+	               	});
+					this.dataService.logOut();
+				}
+			});
+	}
+
 	// Go to previous route
 	previous() {
 		this.route.navigate(['/step-02'])

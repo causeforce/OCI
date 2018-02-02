@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 export class HeaderComponent implements OnInit {
  	
 
-	torontoLogoURL:string='https://secure2.convio.net/cfrca/images/content/pagebuilder/rcto_2018_logo_rgb_full_400x178.png';
+	torontoLogoURL:string='http://ride.conquercancer.ca/toronto/wp-content/uploads/sites/2/2018/01/rcto_2018_logo_rgb_full.svg';
 	torontoLogo:string='assets/images/event_logo.png';
 
 	constructor(private dataService: DataService) {}

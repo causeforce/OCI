@@ -16,6 +16,13 @@ video {
 .row {
 	margin-top: 20px;
 	margin-bottom: 20px;
+	@media screen and (max-width: 400px) {
+		margin-top: 0px;
+		h3 {
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+	}
 }
 
 .vid-btn-container {
@@ -53,3 +60,14 @@ mat-form-field.mat-input.mat-input-container.mat-form-field.ng-tns-c5-1.mat-form
 	max-width: 400px;
 	margin: 0;
 }
+
+// Waiver
+.waiver-container {
+	margin-top: 30px;
+	::ng-deep label.mat-input-placeholder.mat-form-field-placeholder {
+	    color: #000;
+	    font-family: FuturaBold, Helveticca, sans-serif;
+	    text-transform: uppercase;
+	}
+}
+

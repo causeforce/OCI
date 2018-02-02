@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="video-container" >
-				<video (ended)="vidEnded()" (click)="playVideo()" #videoPlayer>
+				<video (seeking)="seekingVideo($event)" (ended)="vidEnded()" (click)="playVideo()" #videoPlayer>
 				  <source src="assets/video/sample.mp4" type="video/mp4">
 				Your browser does not support this video.
 				</video>
@@ -51,7 +51,7 @@
 		<div class="col-12">
 			<div class="waiver-container">
 				<mat-form-field>
-		  			<textarea #waiverTxt (scroll)="waiverScroll()" matInput placeholder="Waiver (you must read the waiver in order to continue)" matTextareaAutosize matAutosizeMinRows="2"
+		  			<textarea #waiverTxt (scroll)="waiverScroll()" matInput placeholder="Waiver (you must read the entire waiver in order to continue)" matTextareaAutosize matAutosizeMinRows="2"
 		            matAutosizeMaxRows="15" disabled>
 Participants in all or any part of The Enbridge Ride to Conquer Cancer benefiting Princess Margaret Cancer Centre, scheduled to take place on June 10 - 11, 2018, including any pre- or post-event activities (the "Event"), including virtual riders, must agree to this Waiver.
 

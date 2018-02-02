@@ -9,8 +9,11 @@
 }
 .logo {
 	img {
-		max-width: 200px;
+		max-width: 150px;
 		margin-left: 20px;
+		@media screen and (max-width: 768px) {
+			max-width: 100px;
+		}
 	}
 }
 nav {
@@ -26,5 +29,8 @@ nav {
 	h2 {
 		margin-bottom: 0px;
 		text-transform: uppercase;
+		@media screen and (max-width: 400px) {
+			font-size: 24px;
+		}
 	}
 }

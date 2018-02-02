@@ -66,36 +66,30 @@
 
 				<!-- Cancer Survivor -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question14">
-					<p>The Ride uses a yellow flag and stickers to identify cancer survivors. If you are a cancer survivor or are battling cancer at this time and would like to be recognized, please select an option below.</p>
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
-					<mat-form-field>
-						<mat-select formControlName="cancerSurvivor" class="mat-select" placeholder="Cancer Survivor" [(ngModel)]="cancerRes">
-						<!-- <mat-select class="mat-select" placeholder="Cancer Survivor: " [(ngModel)]="cancerRes"> -->
-						  	<p class="change-txt">
-								<small>Please make a selection:</small>
-							</p>
-						    <mat-option *ngFor="let cancerSurvivor of matSelect" [value]="cancerSurvivor.value">
-						      {{ cancerSurvivor.viewValue }}
-						    </mat-option>
-						</mat-select>
-					</mat-form-field>
+					<mat-radio-group class="route-radio-group" formControlName="cancerSurvivor" [(ngModel)]="cancerRes">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
 				</div>
 
 				<!-- Veg Meals -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question15">
-					<p>If you require a vegetarian meal please select an option below. Gluten free options will be available at every meal/snack area.</p>
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
-					<mat-form-field>
-						<mat-select formControlName="vegMeals" class="mat-select" placeholder="Vegetarian Meals" [(ngModel)]="vegRes">
-						<!-- <mat-select class="mat-select" placeholder="Vegetarian Meals: " [(ngModel)]="vegRes"> -->
-						  	<p class="change-txt">
-								<small>Please make a selection:</small>
-							</p>
-						    <mat-option *ngFor="let vegMeal of matSelect" [value]="vegMeal.value">
-						      {{ vegMeal.viewValue }}
-						    </mat-option>
-						</mat-select>
-					</mat-form-field>
+					<mat-radio-group class="route-radio-group" formControlName="vegMeals" [(ngModel)]="vegRes">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
 				</div>
 
 				<!-- Jersey sizes -->
@@ -116,31 +110,29 @@
 				<!-- Shuttle -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question19">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
-					<mat-form-field>
-						<mat-select formControlName="shuttle1" class="mat-select" placeholder="Shuttle Selection" [(ngModel)]="shuttleRes">
-						  	<p class="change-txt">
-								<small>Please make a selection:</small>
-							</p>
-						    <mat-option *ngFor="let shuttle of matSelect" [value]="shuttle.value">
-						      {{ shuttle.viewValue }}
-						    </mat-option>
-						</mat-select>
-					</mat-form-field>
+					<mat-radio-group class="route-radio-group" formControlName="shuttle1" [(ngModel)]="shuttleRes">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
 				</div>
 				
 				<!-- Shuttle 2-->
 				<div class="form-group" *ngIf="res.questionId === dataService.question20">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
-					<mat-form-field>
-						<mat-select formControlName="shuttle2" class="mat-select" placeholder="Shuttle Selection" [(ngModel)]="shuttleRes2">
-						  	<p class="change-txt">
-								<small>Please make a selection:</small>
-							</p>
-						    <mat-option *ngFor="let shuttle of matSelect" [value]="shuttle.value">
-						      {{ shuttle.viewValue }}
-						    </mat-option>
-						</mat-select>
-					</mat-form-field>
+					<mat-radio-group class="route-radio-group" formControlName="shuttle2" [(ngModel)]="shuttleRes2">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
 				</div>
 				
 				<!-- Years attended -->
@@ -214,7 +206,7 @@
 	<div class="row bottom-nav-row" *ngIf="surveyResults.getSurveyResponsesResponse">
 		<div class="col-12">
 			<div class="btn-container">
-				<button mat-raised-button color="accent" class="prev-btn" (click)="previous()">
+				<button mat-raised-button color="accent" class="prev-btn" (click)="previousFlowStep()">
 					Back
 				</button>
 				<button 
