@@ -47,10 +47,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 You may also contact the development team at CauseForce for further help.
 
-## Developed By: 
-Moe Quraishi, Front-end / MEAN Stack Developer 
-(mquraishi@causeforce.com)
-
 For more information about CauseForce visit http://www.causeforce.com/
 
 For more information on "The Ride to Conquer Cancer" visit http://www.conquercancer.ca
+
+## Developed with ❤️  By: 
+Moe Quraishi, Front-end / MEAN Stack Developer 
+(mquraishi@causeforce.com)
