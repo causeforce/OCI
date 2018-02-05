@@ -2,6 +2,15 @@
 
 #step-02 {
 	margin-bottom: 30px;
+
+	@media screen and (max-width: 768px) {
+		.pg-container {
+			h3 {
+				margin: 20px 0;
+				text-align: center;
+			}
+		}
+	}
 }
 
 #admin-container {

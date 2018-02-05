@@ -49,8 +49,8 @@ p {
 }
 .results-cont {
 	a {
-		font-family: FuturaBold, Helveticca, sans-serif;
-		text-transform: uppercase;
+		font-family: FuturaReg, Helveticca, sans-serif;
+		text-transform: capitalize;
 		color: $black;
 		text-decoration: none;
 		transition: all 0.2s ease-in-out;
@@ -85,6 +85,9 @@ p {
 	-moz-cursor: pointer;
 }
 
-.search-row .search-btn {
-	margin: 30px 0;
+.search-row {
+	transition: all 0.2s ease-in-out;
+	.search-btn {
+		margin: 30px 0;
+	}
 }

@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./step-01.component.scss']
 })
 export class Step01Component implements OnInit {
-	// Local boolean
+	// Locale boolean
 	hide = true;
 
 	// FormGroup for Validation

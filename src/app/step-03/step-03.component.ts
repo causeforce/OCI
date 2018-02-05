@@ -85,7 +85,8 @@ export class Step03Component implements OnInit {
 	    {value: '7', viewValue: '7'},
 	    {value: '8', viewValue: '8'},
 	    {value: '9', viewValue: '9'},
-	    {value: '10', viewValue: '10'}
+	    {value: '10', viewValue: '10'},
+	    {value: '11', viewValue: '11'}
 	];
 
 	// Specifying API Method Variable
@@ -345,6 +346,13 @@ export class Step03Component implements OnInit {
                         duration: 3500,
                         extraClasses: ['saved-info']
                 });
+			}, (error) => {
+				if (error) {
+					this.snackBar.open("Sorry, there was an error, please try again.", "Close", {
+                        duration: 3500,
+                        extraClasses: ['error-info']
+                	});
+				}
 			});
 	}
 

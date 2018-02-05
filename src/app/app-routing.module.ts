@@ -12,15 +12,15 @@ import { Step08Component } from './step-08/step-08.component';
 import { Step09Component } from './step-09/step-09.component';
 
 const routes: Routes = [
-	{ path: 'step-01', component: Step01Component },
-	{ path: 'step-02', component: Step02Component },
-	{ path: 'step-03', component: Step03Component },
-	{ path: 'step-04', component: Step04Component },
-	{ path: 'step-05', component: Step05Component },
-	{ path: 'step-06', component: Step06Component },
-	{ path: 'step-07', component: Step07Component },
-	{ path: 'step-08', component: Step08Component },
-	{ path: 'step-09', component: Step09Component },
+	{ path: 'step-01', component: Step01Component, data: { page: 'one' } },
+	{ path: 'step-02', component: Step02Component, data: { page: 'two' } },
+	{ path: 'step-03', component: Step03Component, data: { page: 'three' } },
+	{ path: 'step-04', component: Step04Component, data: { page: 'four' } },
+	{ path: 'step-05', component: Step05Component, data: { page: 'five' } },
+	{ path: 'step-06', component: Step06Component, data: { page: 'six' } },
+	{ path: 'step-07', component: Step07Component, data: { page: 'seven' } },
+	{ path: 'step-08', component: Step08Component, data: { page: 'eight' } },
+	{ path: 'step-09', component: Step09Component, data: { page: 'nine' } },
 	{ path: '', redirectTo: '/step-01', pathMatch: 'full' }
 ];
 

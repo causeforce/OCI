@@ -33,7 +33,7 @@
 						</mat-hint> -->
 
 					    <mat-error *ngIf="step03Form.controls.emergencyName.invalid">
-					      Name is <strong>required</strong>
+					      Name is required.
 					    </mat-error>
 				</mat-form-field>
 			</div>
@@ -55,7 +55,7 @@
 						</mat-hint> -->
 
 						<mat-error *ngIf="step03Form.controls.emergencyPhone.invalid">
-					      Phone number cannot be less than <strong>5 numbers.</strong>
+					      Phone number cannot be less than 5 numbers.
 					    </mat-error>
 				</mat-form-field>
 			</div>
@@ -66,7 +66,7 @@
 
 				<!-- Cancer Survivor -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question14">
-					<p><strong>{{res.questionText}}</strong> (optional)</p>
+					<p><strong>{{res.questionText}}</strong> (Please Note: The Ride uses a yellow flag and stickers to identify cancer survivors. If you are a cancer survivor or are battling cancer at this time and would like to be recognized, please make a selection.) (optional)</p>
 					<mat-radio-group class="route-radio-group" formControlName="cancerSurvivor" [(ngModel)]="cancerRes">
 						<mat-radio-button 
 							class="route-radio-button"
@@ -80,7 +80,7 @@
 
 				<!-- Veg Meals -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question15">
-					<p><strong>{{res.questionText}}</strong> (optional)</p>
+					<p><strong>{{res.questionText}}</strong> (Please note: gluten free options will be available at every meal/snack area.) (optional)</p>
 					<mat-radio-group class="route-radio-group" formControlName="vegMeals" [(ngModel)]="vegRes">
 						<mat-radio-button 
 							class="route-radio-button"

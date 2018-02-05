@@ -1,7 +1,7 @@
 <app-stepper></app-stepper>
 
 <!-- Preloader -->
-<div class="mat-spinner-container" *ngIf="!data">
+<div class="mat-spinner-container" *ngIf="!flowStepResults">
 	<div class="spinner-inner">
 		<mat-spinner></mat-spinner>
 	</div>
@@ -31,7 +31,7 @@
 					</mat-hint> -->
 
 				    <mat-error *ngIf="healthForm.controls.healthName.invalid">
-				      Health Insurance Name is <strong>required</strong>
+				      Health Insurance Name is required.
 				    </mat-error>
 				</mat-form-field>
 			</div>
@@ -51,7 +51,7 @@
 					</mat-hint> -->
 
 				    <mat-error>
-				    	Health Insurance Number cannot be <strong>less than 5 characters</strong>.
+				    	Health Insurance Number cannot be less than 5 characters.
 				    </mat-error>
 				</mat-form-field>
 			</div>

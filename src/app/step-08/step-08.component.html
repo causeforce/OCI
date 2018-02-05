@@ -123,7 +123,7 @@
 
 		<div class="container" *ngIf="tentingResults.getTentingSearchResponse">
 			<div class="row results-head" >
-				<div class="col">
+				<div class="col-8">
 					<p class="text-uppercase">
 						<strong>Name</strong>
 					</p>
@@ -133,7 +133,7 @@
 						<strong>Fundraising Status</strong>
 					</p>
 				</div> -->
-				<div class="col">
+				<div class="col-4">
 					<p class="text-uppercase">
 						<strong>Request</strong>
 					</p>
@@ -143,13 +143,13 @@
 			<div class="results-cont" *ngIf="tentingResults.getTentingSearchResponse.totalNumberResults != '1'">
 
 				<div class="row" *ngFor="let res of tentingResults.getTentingSearchResponse.record">
-					<div class="col">
+					<div class="col-8">
 						<a href="{{res.personalPageUrl}}" target="_blank">{{res.name.first}} {{res.name.last}}</a>
 					</div>
 <!-- 					<div class="col-md-4">
 						<p>{{res.tentmateStatus}}</p>
 					</div> -->
-					<div class="col">
+					<div class="col-4">
 						<a class="inv-tent" (click)="invite(res.consId)">Invite</a>
 					</div>
 				</div>
@@ -168,7 +168,7 @@
 						<p>{{res.tentmateStatus}}</p>
 					</div> -->
 					<div class="col">
-						<a class="inv-tent" (click)="invite(tentingResults.getTentingSearchResponse.record.consId)">Send Invite</a>
+						<a class="inv-tent" (click)="invite(tentingResults.getTentingSearchResponse.record.consId)">Invite</a>
 					</div>
 				</div>
 				
