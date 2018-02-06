@@ -56,5 +56,5 @@ For more information on "The Ride to Conquer Cancer" visit http://www.conquercan
 (mquraishi@causeforce.com)
 
 ### Design:
-Shally Juarez, UX/UI Designer
+🎨 Shally Juarez, UX/UI Designer
 (sjuarez@causeforce.com)
