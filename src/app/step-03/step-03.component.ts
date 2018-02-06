@@ -42,6 +42,9 @@ export class Step03Component implements OnInit {
 	vegRes:string;
 	shuttleRes:string;
 	shuttleRes2:string;
+	shuttleRes3:string;
+	shuttleRes4:string;
+	shuttleRes5:string;
 	jerseyRes:string;
 	attendenceRes:string;
 	routeRes:string;
@@ -92,11 +95,6 @@ export class Step03Component implements OnInit {
 	// Specifying API Method Variable
 	method:string;
 
-	// Survey Question IDs
-	question_1:string = '&question_86997=' + this.attendenceRes;
-	question_2:string = '&question_87010=' + this.cancerRes;
-	question_3:string = '&question_87011=' + this.vegRes;
-
 	constructor(private dataService: DataService, private route: Router, private http: HttpClient, public snackBar: MatSnackBar) { 
 	}
 
@@ -114,6 +112,9 @@ export class Step03Component implements OnInit {
 			jerseySizes: new FormControl(this.jerseyRes),
 			shuttle1: new FormControl(this.shuttleRes),
 			shuttle2: new FormControl(this.shuttleRes2),
+			shuttle3: new FormControl(this.shuttleRes3),
+			shuttle4: new FormControl(this.shuttleRes4),
+			shuttle5: new FormControl(this.shuttleRes5),
 			experienced: new FormControl(this.experiencedRiderRes)
 		});
 
@@ -158,7 +159,8 @@ export class Step03Component implements OnInit {
 			.subscribe(res => {
 				this.surveyResults = res;
 
-				// For Loop to get Survey Data and set it to the correct variables
+				// For loop to get Survey Data and set it to the correct variables (this is important for data to be retrieved and displayed in the DOM properly). It checks if the data exists already to set it to the proper element in the DOM, if the data does NOT exist, set is as blank (null or undefined causes issues). 
+
 				for (let res of this.surveyResults.getSurveyResponsesResponse.responses) {
 
 					// Cancer Survivor
@@ -230,6 +232,39 @@ export class Step03Component implements OnInit {
 						}
 					}
 
+					// Shuttle 3 Selection
+					if (res.questionId === this.dataService.question21) {
+						this.shuttleRes3 = res.responseValue;
+						if (this.shuttleRes3 === undefined || null) {
+							this.shuttleRes3 = res.responseValue;
+						}
+						if (Object.keys(res.responseValue).length === 0) {
+							this.shuttleRes3 = '';
+						}
+					}
+
+					// Shuttle 4 Selection
+					if (res.questionId === this.dataService.question22) {
+						this.shuttleRes4 = res.responseValue;
+						if (this.shuttleRes4 === undefined || null) {
+							this.shuttleRes4 = res.responseValue;
+						}
+						if (Object.keys(res.responseValue).length === 0) {
+							this.shuttleRes4 = '';
+						}
+					}
+
+					// Shuttle 5 Selection
+					if (res.questionId === this.dataService.question23) {
+						this.shuttleRes5 = res.responseValue;
+						if (this.shuttleRes5 === undefined || null) {
+							this.shuttleRes5 = res.responseValue;
+						}
+						if (Object.keys(res.responseValue).length === 0) {
+							this.shuttleRes5 = '';
+						}
+					}
+
 					// Route Selection
 					if (res.questionId === this.dataService.question25) {
 						this.routeRes = res.responseValue;
@@ -267,10 +302,13 @@ export class Step03Component implements OnInit {
 		const question_jersey = '&question_'+ this.dataService.question18 +'=' + this.jerseyRes;
 		const question_shuttle1 = '&question_'+ this.dataService.question19 +'=' + this.shuttleRes;
 		const question_shuttle2 = '&question_'+ this.dataService.question20 +'=' + this.shuttleRes2;
+		const question_shuttle3 = '&question_'+ this.dataService.question21 +'=' + this.shuttleRes3;
+		const question_shuttle4 = '&question_'+ this.dataService.question22 +'=' + this.shuttleRes4;
+		const question_shuttle5 = '&question_'+ this.dataService.question23 +'=' + this.shuttleRes5;
 		const question_route = '&question_'+ this.dataService.question25 +'=' + this.routeRes;
 		const question_safety_rider = '&question_'+ this.dataService.question26 +'=' + this.experiencedRiderRes;
 
-		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_shuttle3 + question_shuttle4 + question_shuttle5 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
 			.subscribe(res => {
 				// console.log(res);
 				this.updateReg();
@@ -306,11 +344,15 @@ export class Step03Component implements OnInit {
 		const question_jersey = '&question_'+ this.dataService.question18 +'=' + this.jerseyRes;
 		const question_shuttle1 = '&question_'+ this.dataService.question19 +'=' + this.shuttleRes;
 		const question_shuttle2 = '&question_'+ this.dataService.question20 +'=' + this.shuttleRes2;
+		const question_shuttle3 = '&question_'+ this.dataService.question21 +'=' + this.shuttleRes3;
+		const question_shuttle4 = '&question_'+ this.dataService.question22 +'=' + this.shuttleRes4;
+		const question_shuttle5 = '&question_'+ this.dataService.question23 +'=' + this.shuttleRes5;
 		const question_route = '&question_'+ this.dataService.question25 +'=' + this.routeRes;
 		const question_safety_rider = '&question_'+ this.dataService.question26 +'=' + this.experiencedRiderRes;
 
-		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_attendence + question_cancer + question_veg + question_jersey + question_shuttle1 + question_shuttle2 + question_shuttle3 + question_shuttle4 + question_shuttle5 + question_route + question_safety_rider + '&sso_auth_token=' + this.dataService.ssoToken, null)
 			.subscribe(res => {
+				console.log(res);
 				// this.updateReg();
 				this.snackBar.open("Your information has been saved!", "Close", {
                         duration: 3500,
@@ -381,6 +423,11 @@ export class Step03Component implements OnInit {
 
 			}, (err) => {
 				console.log(err);
+				this.snackBar.open("There was an error, please login again.", "Close", {
+                    duration: 3500,
+                    extraClasses: ['error-info']
+           		});
+				this.dataService.logOut();
 			});
 	}
 

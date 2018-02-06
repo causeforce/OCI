@@ -7,6 +7,7 @@
 	</div>
 </div>
 
+<!-- Begin Step 05 -->
 <div class="container" id="step-05" *ngIf="data">
 	<div class="row">
 		<div class="form-container">
@@ -21,7 +22,7 @@
 		<div class="col-12">
 			<div class="video-container" >
 				<video (seeking)="seekingVideo($event)" (ended)="vidEnded()" (click)="playVideo()" #videoPlayer>
-				  <source src="assets/video/sample.mp4" type="video/mp4">
+				  <source src="assets/videos/oci_sample_vid.mp4" type="video/mp4">
 				Your browser does not support this video.
 				</video>
 			</div>

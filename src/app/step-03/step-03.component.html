@@ -7,6 +7,7 @@
 	</div>
 </div>
 
+<!-- Begin Step 03 -->
 <div class="container" id="step-03">
 	<div class="row">
 		<div class="col-12">
@@ -125,6 +126,48 @@
 				<div class="form-group" *ngIf="res.questionId === dataService.question20">
 					<p><strong>{{res.questionText}}</strong> (optional)</p>
 					<mat-radio-group class="route-radio-group" formControlName="shuttle2" [(ngModel)]="shuttleRes2">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<!-- Shuttle 3-->
+				<div class="form-group" *ngIf="res.questionId === dataService.question21">
+					<p><strong>{{res.questionText}}</strong> (optional)</p>
+					<mat-radio-group class="route-radio-group" formControlName="shuttle3" [(ngModel)]="shuttleRes3">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<!-- Shuttle 4-->
+				<div class="form-group" *ngIf="res.questionId === dataService.question22">
+					<p><strong>{{res.questionText}}</strong> (optional)</p>
+					<mat-radio-group class="route-radio-group" formControlName="shuttle4" [(ngModel)]="shuttleRes4">
+						<mat-radio-button 
+							class="route-radio-button"
+							color="primary"  
+							*ngFor="let yesNo of matSelect" 
+							[value]="yesNo.value">
+							{{yesNo.viewValue}}
+						</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<!-- Shuttle 5-->
+				<div class="form-group" *ngIf="res.questionId === dataService.question23">
+					<p><strong>{{res.questionText}}</strong> (optional)</p>
+					<mat-radio-group class="route-radio-group" formControlName="shuttle5" [(ngModel)]="shuttleRes5">
 						<mat-radio-button 
 							class="route-radio-button"
 							color="primary"  

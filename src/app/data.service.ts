@@ -62,7 +62,7 @@ export class DataService {
 
 	loginErr:boolean;
 
-	// API Call Information
+	// API Call Information (change per region)
 	convioURL:string = 'https://secure2.convio.net/cfrca/site/';
 	loginMethod:string;
 	method:string;
@@ -305,13 +305,17 @@ export class DataService {
 		this.method = 'CRTeamraiserAPI?method=getRegistration&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.storageToken;
 		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
+				// Results from the API Call
 				this.regResponse = res;
+				
 				this.participationID = this.regResponse.getRegistrationResponse.registration.participationTypeId;
 				localStorage.setItem('participationID', this.participationID);
 				this.storageParticipationID = localStorage.getItem('participationID');
+				
 				// console.log('Storage Participation ID: ' + this.storageParticipationID);
 				// console.log('Login Participation ID: ' + this.participationID);
 				// console.log(this.regResponse);
+				
 				this.emergencyName = this.regResponse.getRegistrationResponse.registration.emergencyName;
 				this.emergencyPhone = this.regResponse.getRegistrationResponse.registration.emergencyPhone;
 
@@ -417,7 +421,7 @@ export class DataService {
 				console.log(this.updateUserResults);
 				this.router.navigate(['/step-03']);
 			}, (err) => {
-				console.log('There was an error getting the Participation Info:')
+				// console.log('There was an error getting the Participation Info:')
 				console.log(err);
 			});
 	}
@@ -473,7 +477,7 @@ export class DataService {
                         extraClasses: ['saved-info']
                 });
 			}, (err) => {
-				console.log('There was an error getting the Participation Info:')
+				// console.log('There was an error getting the Participation Info:')
 				console.log(err);
 			});
 	}
@@ -487,7 +491,7 @@ export class DataService {
 				// console.log(this.getTeamRes);
 				this.teamName = this.getTeamRes.getTeamResponse.team.name;
 			}, (err) => {
-				console.log('There was an error getting the getTeam Info');
+				// console.log('There was an error getting the getTeam Info');
 				console.log(err);
 			});
 		

@@ -77,7 +77,6 @@ export class Step02Component implements OnInit {
 
 			this.getRegInfo();
 			this.getUserInfo();
-			this.dataService.getTeam();
 
 			this.updateCheckInStatus();
 			this.updateFlowStep();
@@ -150,6 +149,7 @@ export class Step02Component implements OnInit {
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.dataService.regResponse = res;
+				// console.log(this.dataService.regResponse);
 				
 				// Setting the participation ID Variables
 				this.dataService.participationID = this.dataService.regResponse.getRegistrationResponse.registration.participationTypeId;
@@ -161,6 +161,11 @@ export class Step02Component implements OnInit {
 				this.dataService.emergencyPhone = this.dataService.regResponse.getRegistrationResponse.registration.emergencyPhone;
 
 				this.dataService.getParticipationType();
+
+				// If participant is in a team, get the team information
+				if (this.dataService.regResponse.getRegistrationResponse.registration.teamId > 0) {
+					this.dataService.getTeam();
+				}
 			}, (err) => {
 				console.log(err);
 				this.dataService.tokenExpired = true;
@@ -175,6 +180,8 @@ export class Step02Component implements OnInit {
 		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.consData = res;
+				// console.log(this.consData);
+
 				// console.log(this.dataService.getConsInfo);
 				this.firstName = this.consData.getConsResponse.name.first;
 				this.lastName = this.consData.getConsResponse.name.last;
