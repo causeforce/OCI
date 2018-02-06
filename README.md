@@ -1,6 +1,9 @@
 # Online Check-in for ConquerCancer.ca
 
-This web application was created for participants of "The Ride to Conquer Cancer" - www.conquercancer.ca
+This web application was created for participants of The Ride to Conquer Cancer - www.conquercancer.ca
+
+Built with Angular 5, Bootstrap 4, and Angular Material 2 (custom theme).
+Luminate Online API as the API end-point/"back-end". (http://open.convio.com/api/#main)
 
 # Angular CLI Commands 
 
@@ -49,7 +52,7 @@ You may also contact the development team at CauseForce for further help.
 
 For more information about CauseForce visit http://www.causeforce.com/
 
-For more information on "The Ride to Conquer Cancer" visit http://www.conquercancer.ca
+For more information on The Ride to Conquer Cancer visit http://www.conquercancer.ca
 
 ## Development: 
 💻 Moe Quraishi, Front-end / MEAN Stack Developer 
