@@ -54,3 +54,7 @@ For more information on "The Ride to Conquer Cancer" visit http://www.conquercan
 ## Developer: 
 💻 Moe Quraishi, Front-end / MEAN Stack Developer 
 (mquraishi@causeforce.com)
+
+### Design:
+Shally Juarez, UX/UI Designer
+(sjuarez@causeforce.com)
