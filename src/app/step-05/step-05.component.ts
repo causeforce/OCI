@@ -304,4 +304,9 @@ export class Step05Component implements OnInit {
 			});
 	}
 
+	// Disable Right-Click on Video
+	disableClick(e) {
+		e.preventDefault();
+	}
+
 }
