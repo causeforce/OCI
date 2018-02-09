@@ -56,6 +56,10 @@ export class DataService {
 	question25:string = '87021'; // Route Number 
 	question26:string = '87022'; // Safety Rider 
 
+	// Upsell IDs
+	hiddenUpsellID:string = '1441'; // Upsell ID #1 copied from Teamraiser
+	hiddenUpsellID2:string = '1443'; // Upsell ID #2 copied from Teamraiser
+
 	// Login Information
  	username:string;
 	password:string;

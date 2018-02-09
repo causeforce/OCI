@@ -269,10 +269,10 @@ export class Step07Component implements OnInit {
 				// For loop to loop through the responded data from API call
 				for (let data of this.surveyResults.getSurveyResponsesResponse.responses) {
 					// If questionId is same as waiver question ID in Survey then check if fullName variable is undefined or null, if so set it as the response value else if it's length is equil to 0 or no reponseValue, then set it to a blank string
-					if (data.questionId === '87002') {
+					if (data.questionId === this.data.question6) {
 						this.upsellResponse = data.responseValue;
 					}
-					if (data.questionId === '87012') {
+					if (data.questionId === this.data.question16) {
 						this.hiddenUpsellID = data.responseValue;
 					}
 				}

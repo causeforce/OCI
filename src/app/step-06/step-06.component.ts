@@ -111,7 +111,7 @@ export class Step06Component implements OnInit {
 							this.upsellResults = data.responseValue;
 						}
 
-						if (data.responseValue === '1441' || data.responseValue === '1443') {
+						if (data.responseValue === this.data.hiddenUpsellID || data.responseValue === this.data.hiddenUpsellID2) {
 							this.upsellHiddenResult = 'Yes';
 						}
 
@@ -123,9 +123,9 @@ export class Step06Component implements OnInit {
 							this.upsellResults = null;
 							console.log('Nothing has been selected for upsell.');
 						}
-
 					}
 				}
+
 			}, 
 			(err) => {
 				console.log('There was an error!');
@@ -142,19 +142,20 @@ export class Step06Component implements OnInit {
 	}
 
 	updateSurveyRes() {
-		if (this.upsellResults === '1441' || this.upsellResults === '1443') {
+		if (this.upsellResults === this.data.hiddenUpsellID || this.upsellResults === this.data.hiddenUpsellID2) {
 			this.upsellHiddenResult = 'Yes'; 
 		}
 		if (this.upsellResults === '0') {
 			this.upsellHiddenResult = 'No'; 
 		}
+
 		// Constant variable for the upsell question response and ID
 		const question_hidden_upsell = '&question_'+ this.data.question16 + '=' + this.upsellResults;
-		const question_accepted_upsell= '&question_'+ this.data.question6 + '=' + this.upsellHiddenResult;
+		const question_accepted_upsell = '&question_'+ this.data.question6 + '=' + this.upsellHiddenResult;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
-		this.http.post(updateSurveyResponsesUrl + question_hidden_upsell + question_hidden_upsell + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_hidden_upsell + question_accepted_upsell + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
 			.subscribe(res => {
 				this.surveyResults = res;
 
@@ -172,19 +173,20 @@ export class Step06Component implements OnInit {
 
 	// Save the current Survey Responses
 	saveSurveyResponses() {
-		if (this.upsellResults === '1441' || this.upsellResults === '1443') {
+		if (this.upsellResults === this.data.hiddenUpsellID || this.upsellResults === this.data.hiddenUpsellID2) {
 			this.upsellHiddenResult = 'Yes'; 
-		}
+		} 
 		if (this.upsellResults === '0') {
 			this.upsellHiddenResult = 'No'; 
 		}
+		console.log(this.upsellHiddenResult);
 		// Constant variable for the upsell question response and ID
 		const question_hidden_upsell = '&question_'+ this.data.question16 + '=' + this.upsellResults;
-		const question_accepted_upsell= '&question_'+ this.data.question6 + '=' + this.upsellHiddenResult;
+		const question_accepted_upsell = '&question_'+ this.data.question6 + '=' + this.upsellHiddenResult;
 
 		var updateSurveyResponsesUrl = 'https://secure2.convio.net/cfrca/site/CRTeamraiserAPI?method=updateSurveyResponses&api_key=cfrca&v=1.0&response_format=json&fr_id=' + this.data.eventID;
 
-		this.http.post(updateSurveyResponsesUrl + question_hidden_upsell + question_hidden_upsell + '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
+		this.http.post(updateSurveyResponsesUrl + question_hidden_upsell + question_accepted_upsell+ '&survey_id=' + this.data.surveyID + '&sso_auth_token=' + this.data.ssoToken, null)
 			.subscribe(res => {
 				this.surveyResults = res;
 
