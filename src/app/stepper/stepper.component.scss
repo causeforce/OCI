@@ -13,6 +13,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+
     .stepper-each {
 	    max-width: 11.9%;
 	    width: 100%;
@@ -27,6 +28,7 @@
 		@media screen and (max-width: 365px) {
 			max-width: 23%;
 		}
+
 	    .step {
 			background: #dadada;
 		    border-radius: 50%;
@@ -39,9 +41,7 @@
 		    color: #fff;
 		    margin-bottom: 15px;
 		}
-		// .step.active {
-		// 	background: $blue;
-		// }
+
 		.stepper-txt {
 			color: #c1c1c1;
 		    font-size: 12px;
@@ -51,17 +51,20 @@
 		    }
 		}
 	}
+
 	.stepper-each.active {
 		.step {
 			background: $blue;
 		}
 	}
+
 	.stepper-each.active.current {
 		.stepper-txt {
 			color: $blue;
 			font-family: FuturaBold, Helveticca, sans-serif;
 		}
 	}
+
 	.bar {
 		border-bottom: 5px solid #dadada;
 	    position: absolute;
@@ -78,6 +81,7 @@
 		   display: none;
 		}
 	}
+
 	.progress-full,
 	.progress-2,
 	.progress-3,
@@ -96,6 +100,7 @@
 	    	display: none;
 	    }
 	}
+	
 	.progress-2 {
 		max-width: 15%;
 	}

@@ -40,11 +40,16 @@ export class Step05Component implements OnInit {
 	// Survey results
 	surveyResults:any={};
 
+	// Admin panel data
+	adminResults:any={};
+
 	constructor(private data: DataService, private http: HttpClient, private route: Router, public snackBar: MatSnackBar) {}
 
 	ngOnInit() {
 
 		window.scrollTo(0,0);
+
+		this.adminAPI();
 
 		// Checking logged in state, and running correct functions
 		if (this.data.isLoggedIn() === true && this.data.tokenExpired === false) {
@@ -77,6 +82,18 @@ export class Step05Component implements OnInit {
 
 	}
 
+	// Admin Panel API call
+	adminAPI() {
+		this.http.get('http://www.conquercancer.ca/site/PageServer?pagename=to18_oci_api&pgwrap=n')
+			.subscribe(res => {
+				console.log(res);
+			}, (error) => {
+				console.log('there was an error');
+				console.log(error);
+			});
+	}
+
+	// Checking the Waiver Scroll position and setting scrolledBottom boolean to true if scrolled more than or equal to 950
 	waiverScroll() {
 		if (this.waiverText.nativeElement.scrollTop >= 950) {
 			this.scrolledBottom = true;
@@ -302,11 +319,6 @@ export class Step05Component implements OnInit {
 				// If flowstep has error, log out the user (to prevent API errors)
 				this.data.logOut();
 			});
-	}
-
-	// Disable Right-Click on Video
-	disableClick(e) {
-		e.preventDefault();
 	}
 
 }

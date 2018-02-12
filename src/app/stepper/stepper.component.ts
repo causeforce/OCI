@@ -21,10 +21,11 @@ export class StepperComponent implements OnInit {
 
 	constructor(private renderer: Renderer2, private router: Router) { }
 
-	ngOnInit() {
-	}
+	ngOnInit() { }
 
 	ngAfterViewInit() {
+		// Adding active class to the stepper
+
 	    this.renderer.addClass(this.el.nativeElement, 'active');
 
 		if (this.router.url === '/step-02'){
@@ -100,19 +101,7 @@ export class StepperComponent implements OnInit {
 		if (this.router.url === '/'){
 		    this.renderer.addClass(this.hide.nativeElement, 'hide');
 		}	
-		// if (window.location.href.indexOf("step-02") > -1) {
-		// 	console.log('you are in step 2');
-		// 	this.renderer.addClass(this.el.nativeElement, 'active');
-		// }
 
-		// if (window.location.href.indexOf("step-03") > -1) {
-		// 	console.log('you are in step 2');
-		// 	this.renderer.addClass(this.el2.nativeElement, 'active');
-		// }
-
-		// if (window.location.href.indexOf("step-01") > -1) {
-		// 	this.renderer.addClass(this.hide.nativeElement, 'hide');
-		// }
 	}
 
 }

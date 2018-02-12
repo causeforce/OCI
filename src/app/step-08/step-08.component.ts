@@ -124,15 +124,14 @@ export class Step08Component implements OnInit {
 	// Search for a Tentmate (based on filters)
 	getTentingSearch() {
 
+		// Checking tentmate message value and setting the message to the proper variable
 		if (this.message.nativeElement.value.length != 0) {
 			this.tentMessage = this.message.nativeElement.value;
 
 			// console.log(this.tentMessage);
-
-			// this.data.method = 'CRTeamraiserAPI?method=updateTentingStatus&api_key=cfrca&v=1.0&response_format=json&tentmate_id='+ this.tentConsID +'&update_type='+ this.tentStatus + '&message='+ this.tentMessage +'&fr_id='+ this.data.eventID +'&sso_auth_token=' + this.data.ssoToken;
 		}
 
-		// Filters for searching.
+		// Filters for searching for a tentmate
 		const searchEmail = '&search_email=' + this.searchEmail;
 		const searchFirstName = '&search_first_name=' + this.searchFirstName;
 		const searchLastName = '&search_last_name=' + this.searchLastName;
