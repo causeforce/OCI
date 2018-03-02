@@ -9,8 +9,8 @@
 
 <!-- Begin Step 08 -->
 <div class="container" id="step-08" *ngIf="regResponse">
-	<div class="form-container" >
-		<div class="row">
+	<div class="form-container">
+		<div class="row" *ngIf="tentmateStatus === false">
 			<h4>Tent Mate Selection</h4>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero. Donec at enim urna. Quisque nec suscipit dolor. Donec maximus sollicitudin orci non porta.</p>
@@ -44,9 +44,9 @@
 
 		</div>
 
-		<div class="border-btm"></div>
+		<div class="border-btm"  *ngIf="tentSearch && tentmateStatus === false"></div>
 
-		<div class="row search-row" *ngIf="tentSearch">
+		<div class="row search-row" *ngIf="tentSearch && tentmateStatus === false">
 			<h4>Search for a Tent Mate</h4>
 
 			<!-- Search by Email -->
@@ -122,7 +122,7 @@
 			</button>
 		</div>
 
-		<div class="container" *ngIf="tentingResults.getTentingSearchResponse">
+		<div class="container" *ngIf="tentingResults.getTentingSearchResponse && tentmateStatus === false">
 			<div class="row results-head" >
 				<div class="col-8">
 					<p class="text-uppercase">
@@ -191,6 +191,19 @@
 			</div>
 		</div>
 
+		<div class="container" id="step-08" *ngIf="regResponse">
+			<div class="form-container">
+				<div class="row" *ngIf="tentmateStatus === true">
+					<div class="col">
+						<h4>Congratulations!</h4>
+						<p>
+							You have selected a tenting option and may proceed to the next section.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row bottom-nav-row">
 			<div class="form-container">
 				<div class="btn-container">
@@ -198,6 +211,7 @@
 						mat-raised-button 
 						color="accent" 
 						class="prev-btn" 
+						[disabled]="!tentmateStatus"
 						(click)="previousFlowStep()">
 						Back
 					</button>
@@ -206,7 +220,7 @@
 						color="primary" 
 						class="next-btn"
 						(click)="nextFlowStep()" 
-						[disabled]="nextToggle">
+						[disabled]="nextToggle && !tentmateStatus">
 						Next
 					</button>
 				</div>

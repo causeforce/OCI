@@ -64,6 +64,9 @@ export class Step08Component implements OnInit {
 	// Toggle for the Next Button
 	nextToggle:boolean=true;
 
+	// Tentstatus
+	tentmateStatus:boolean=false;
+
 	constructor(private data: DataService, private router: Router, private http: HttpClient, private renderer: Renderer2, public snackBar: MatSnackBar) { }
 
 	ngOnInit() {
@@ -98,6 +101,8 @@ export class Step08Component implements OnInit {
 			.subscribe(res => {
 				this.regResponse = res;
 
+				console.log(this.regResponse);
+
 				this.consID = this.regResponse.getRegistrationResponse.registration.consId;
 				
 				if (this.regResponse.getRegistrationResponse.registration.tentingAllowed === 'true') {
@@ -107,6 +112,10 @@ export class Step08Component implements OnInit {
 					
 					// Route participant to the summary page using router navigate
 					this.nextFlowStep();
+				}
+
+				if (this.regResponse.getRegistrationResponse.registration.tentmateStatus === '2' || this.regResponse.getRegistrationResponse.registration.tentmateStatus === '3' || this.regResponse.getRegistrationResponse.registration.tentmateStatus === '4') {
+					this.tentmateStatus = true;
 				}
 
 			}, (err) => {
@@ -283,6 +292,7 @@ export class Step08Component implements OnInit {
                         duration: 3500,
                         extraClasses: ['saved-info']
                 });
+            	window.location.reload();
 			},(err) => {
 				if (err) {
 					this.snackBar.open("There was an error. (You may have already sent an invite to someone else)", "Close", {

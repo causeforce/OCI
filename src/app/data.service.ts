@@ -227,7 +227,7 @@ export class DataService {
 				// Get flow step
 				this.getFlowStepLogin();
 			}, (err) => {
-				console.log(err);
+				// console.log(err);
 				this.loginErr = true;
 
 				this.snackBar.open("Error with username or password.", "Close", {
@@ -275,7 +275,16 @@ export class DataService {
 					this.router.navigate(['/step-09']);
 				}
 			}, (err) => {
-				console.log(err);
+				// console.log(err);
+
+				// If user tries to login with credentials from a different event display error message
+				if (err.error.errorResponse.code === '2603') {
+					localStorage.removeItem('token');
+					this.snackBar.open("The username / password combination is incorrect for this event.", "Close", {
+	                        duration: 3500,
+	                        extraClasses: ['error-info']
+	                });
+				}
 			});
 	}
 
@@ -329,6 +338,10 @@ export class DataService {
 					this.tentStatus = 'Declined';
 				} else if (this.regResponse.getRegistrationResponse.registration.tentmateStatus === '3') {
 					this.tentStatus = 'Random';
+				} else if (this.regResponse.getRegistrationResponse.registration.tentmateStatus === '4') {
+					this.tentStatus = 'Sent Invite';
+				} else if (this.regResponse.getRegistrationResponse.registration.tentmateStatus === '0') {
+					this.tentStatus = 'None';
 				}
 
 				this.getParticipationType();

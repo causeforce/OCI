@@ -154,19 +154,21 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-12">
-					<mat-form-field>
-						<mat-select formControlName="genderSelect" placeholder="Gender: {{gender}}" [(ngModel)]="gender">
-							<p class="change-txt">
-								<small>Make a selection:</small>
-							</p>
-							<mat-option *ngFor="let gender of matSelect" [value]="gender.value">
-								{{ gender.viewValue }}
-							</mat-option>
-						</mat-select>
-						<mat-error *ngIf="step02Form.controls.liveState.invalid">
-							State is <strong>required.</strong>
-						</mat-error>
-					</mat-form-field>
+					<p>
+						<strong>Please select your gender:</strong>
+					</p>
+					<mat-radio-group class="route-radio-group" formControlName="genderSelect" [(ngModel)]="gender">
+							<mat-radio-button 
+								class="route-radio-button"
+								color="primary"  
+								*ngFor="let gender of matSelect" 
+								[value]="gender.value">
+								{{gender.viewValue}}
+							</mat-radio-button>
+							<mat-error *ngIf="step02Form.controls.liveState.invalid">
+								Gender is required.
+							</mat-error>
+					</mat-radio-group>
 				</div>
 			</div>
 		</form>
