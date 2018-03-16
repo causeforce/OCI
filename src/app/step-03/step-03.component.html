@@ -92,10 +92,10 @@
 						</mat-radio-button>
 					</mat-radio-group>
 				</div>
-        
+
 				<!-- Jersey sizes -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question18">
-					<p><strong>{{res.questionText}}</strong> (optional) - <strong><a target="_blank" href="assets/images/SU18_CUSTOM_RTCC_Size_Chart.pdf">Click here for Size Chart</a> </strong></p>
+					<p><strong>{{res.questionText}}</strong> (optional) - <strong><a class="txt-blue sizing-link" target="_blank" href="assets/images/SU18_CUSTOM_RTCC_Size_Chart.pdf">view sizing guide</a> </strong></p>
 					<mat-form-field>
 						<mat-select formControlName="jerseySizes" class="mat-select" placeholder="Jersey Size" [(ngModel)]="jerseyRes">
 						  	<p class="change-txt">

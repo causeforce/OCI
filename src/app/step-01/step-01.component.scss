@@ -7,9 +7,7 @@
 	}
 	.login-form-container{
 		position: absolute;
-		top: 30%;
-		transform: translateY(-50%);
-		width: 100%;
+		top: 30px;
 		@media screen and (max-width: 768px) {
 			position: relative;
 		    transform: none;
@@ -55,7 +53,7 @@
 
 .fgpass {
 	margin-top: 20px;
-	color: #dadada;
+	color: #a0a0a0;
 	text-align: center;
 	display: block;
 }

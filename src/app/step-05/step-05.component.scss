@@ -1,4 +1,4 @@
-@import '../../styles.scss';
+//@import '../../styles.scss';
 
 video {
 	width: 100%;
@@ -38,8 +38,7 @@ video {
 
 .check-box-text {
     white-space: normal;
-    position: relative;
-    left: 30px;
+    padding: 0 20px;
     @media screen and (max-width: 400px) {
     	left: auto;
     }
@@ -66,6 +65,10 @@ mat-form-field.mat-input.mat-input-container.mat-form-field.ng-tns-c5-1.mat-form
 	h3 {
 		margin: 15px 0;
 	}
+}
+
+.prev-btn {
+  margin-right: 30px;
 }
 
 // Waiver

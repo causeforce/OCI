@@ -11,12 +11,12 @@
 <div class="container" id="step-09">
 	<div class="form-container" >
 		<div class="row" *ngIf="data.getConsInfo">
-			<div class="col">
+			<div class="col-md-6">
 				<h4>Congratulations</h4>
 				<p>You have completed Online Check-in!</p>
 				<br>
 			</div>
-			<div class="col print-col">
+			<div class="col-md-6 print-col">
 				<a (click)="print()">
 					<strong>Print This Screen</strong>
 				</a>
@@ -25,26 +25,26 @@
 		<div class="row" *ngIf="data.getConsInfo">
 			<div class="col">
 				<p class="txt-grey">
-					First name: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.name.first}}</strong>
+					First name: <strong >{{data.getConsInfo.getConsResponse.name.first}}</strong>
 				</p>
 				<p class="txt-grey">
-					Last name: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.name.last}}</strong>
+					Last name: <strong >{{data.getConsInfo.getConsResponse.name.last}}</strong>
 				</p>
 				<p class="txt-grey">
-					Gender: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.gender}}</strong>
+					Gender: <strong >{{data.getConsInfo.getConsResponse.gender}}</strong>
 				</p>
 				<p class="txt-grey">
-					Participation Type: <strong class="txt-blue">{{data.participationType}}</strong>
+					Participation Type: <strong >{{data.participationType}}</strong>
 				</p>
 				<p class="txt-grey">
-					Team name: <strong class="txt-blue" *ngIf="data.teamName">{{data.teamName}}</strong>
-					<strong class="txt-blue" *ngIf="!data.teamName">None</strong> 
+					Team name: <strong  *ngIf="data.teamName">{{data.teamName}}</strong>
+					<strong  *ngIf="!data.teamName">None</strong>
 				</p>
 				<p class="txt-grey">
-					Tentmate Status: <strong class="txt-blue">{{data.tentStatus}}</strong>
+					Tentmate Status: <strong >{{data.tentStatus}}</strong>
 				</p>
 				<p class="txt-grey">
-					Pre-Register?: <strong class="txt-blue" *ngIf="surveyResults">{{preReg}}</strong>
+					Pre-Register?: <strong  *ngIf="surveyResults">{{preReg}}</strong>
 				</p>
 			</div>
 		</div>
@@ -54,37 +54,37 @@
 		<div class="row" *ngIf="data.getConsInfo">
 			<div class="col">
 				<p class="txt-grey">
-					Address 1: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.primary_address.street1}}</strong>
+					Address 1: <strong >{{data.getConsInfo.getConsResponse.primary_address.street1}}</strong>
 				</p>
 				<p class="txt-grey">
-					Address 2: <strong class="txt-blue" *ngIf="data.getConsInfo.getConsResponse.primary_address.street2">{{data.getConsInfo.getConsResponse.primary_address.street2}}</strong>
+					Address 2: <strong  *ngIf="data.getConsInfo.getConsResponse.primary_address.street2">{{data.getConsInfo.getConsResponse.primary_address.street2}}</strong>
 				</p>
 				<p class="txt-grey">
-					City: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.primary_address.city}}</strong>
+					City: <strong >{{data.getConsInfo.getConsResponse.primary_address.city}}</strong>
 				</p>
 				<p class="txt-grey">
-					State: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.primary_address.state}}</strong>
+					State: <strong >{{data.getConsInfo.getConsResponse.primary_address.state}}</strong>
 				</p>
 				<p class="txt-grey">
-					Zip Code: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.primary_address.zip}}</strong>
+					Zip Code: <strong >{{data.getConsInfo.getConsResponse.primary_address.zip}}</strong>
 				</p>
 				<p class="txt-grey">
-					Email Address: <strong class="txt-blue">{{data.getConsInfo.getConsResponse.email.primary_address}}</strong>
+					Email Address: <strong >{{data.getConsInfo.getConsResponse.email.primary_address}}</strong>
 				</p>
 				<p class="txt-grey">
-					Emergency Contact: <strong class="txt-blue">{{data.emergencyName}}</strong>
+					Emergency Contact: <strong >{{data.emergencyName}}</strong>
 				</p>
 				<p class="txt-grey">
-					Emergency Contact Phone: <strong class="txt-blue">{{data.emergencyPhone}}</strong>
+					Emergency Contact Phone: <strong >{{data.emergencyPhone}}</strong>
 				</p>
 			</div>
 		</div>
 
 		<a href="https://secure2.convio.net/cfrca/site/SPageServer?pagename=to18_pc&pc2_page=center&fr_id=1641" target="_blank">
-			<button 
-			mat-raised-button 
+			<button
+			mat-raised-button
 			class="search-btn">
-				Return to Participation Center	
+				Return to Participation Center
 			</button>
 		</a>
 	</div>

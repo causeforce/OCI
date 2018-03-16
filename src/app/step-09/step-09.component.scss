@@ -13,13 +13,17 @@
 		-ms-cursor:pointer;
 	}
 
-	strong.txt-blue {
-		text-transform: uppercase;
-	}
+  .txt-grey {
+    strong {
+      color: $black;
+      text-transform: uppercase;
+    }
+  }
 
-	.print-col {
-		a {
-			text-align: right;
-		}
-	}
+  .print-col {
+    margin-bottom: 25px;
+    a {
+      text-decoration: underline;
+    }
+  }
 }

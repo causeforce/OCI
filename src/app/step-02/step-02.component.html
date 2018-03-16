@@ -17,7 +17,7 @@
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero.
 				</p>
-				<p>You are registered as a {{ dataService.participationType }}. If this is incorrect, please call (888) 771-BIKE(2453)</p>
+				<p>You are registered as a <strong>{{ dataService.participationType }}</strong>. If this is incorrect, please call (888) 771-BIKE(2453)</p>
 			</div>
 		</div>
 	</div>
@@ -25,23 +25,23 @@
 		<form class="form-container" [formGroup]="step02Form" *ngIf="step02Form">
 			<div class="form-group">
 				<label class="font-bold" for="participation-type">
-					Participation Type: <span class="txt-blue">{{ dataService.participationType }}</span>
+					Participation Type: {{ dataService.participationType }}
 				</label>
 			</div>
 			<div class="form-group" *ngIf="dataService.teamName">
 				<label class="font-bold" for="team-name">
-					Team name: <span class="txt-blue">{{ dataService.teamName }}</span>
+					Team name: {{ dataService.teamName }}
 				</label>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<mat-form-field class="mat-input">
-						<input 
-							matInput 
-							required 
-							placeholder="First name:" 
-							value="{{firstName}}" 
-							[(ngModel)]="firstName" 
+						<input
+							matInput
+							required
+							placeholder="First name:"
+							value="{{firstName}}"
+							[(ngModel)]="firstName"
 							formControlName="firstName">
 						<button mat-button *ngIf="firstName" matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
 						    <mat-icon>close</mat-icon>
@@ -53,12 +53,12 @@
 				</div>
 				<div class="form-group col-md-6">
 					<mat-form-field class="mat-input">
-						<input 
-							matInput 
-							required 
-							placeholder="Last name:" 
-							value="{{lastName}}" 
-							[(ngModel)]="lastName" 
+						<input
+							matInput
+							required
+							placeholder="Last name:"
+							value="{{lastName}}"
+							[(ngModel)]="lastName"
 							formControlName="lastName">
 						<button mat-button *ngIf="lastName" matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
 						    <mat-icon>close</mat-icon>
@@ -71,12 +71,12 @@
 			</div>
 			<div class="form-group">
 				<mat-form-field class="mat-input">
-					<input 
-						matInput 
-						required 
-						placeholder="Street Address Line 1:" 
-						value="{{primaryAddress1}}" 
-						[(ngModel)]="primaryAddress1" 
+					<input
+						matInput
+						required
+						placeholder="Street Address Line 1:"
+						value="{{primaryAddress1}}"
+						[(ngModel)]="primaryAddress1"
 						formControlName="liveAddress1">
 					<button mat-button *ngIf="primaryAddress1" matSuffix mat-icon-button aria-label="Clear" (click)="primaryAddress1=''">
 					    <mat-icon>close</mat-icon>
@@ -88,11 +88,11 @@
 			</div>
 			<div class="form-group">
 				<mat-form-field class="mat-input">
-					<input 
-						matInput 
-						placeholder="Street Address Line 2:" 
-						value="{{primaryAddress2}}" 
-						[(ngModel)]="primaryAddress2" 
+					<input
+						matInput
+						placeholder="Street Address Line 2:"
+						value="{{primaryAddress2}}"
+						[(ngModel)]="primaryAddress2"
 						formControlName="liveAddress2">
 					<button mat-button *ngIf="primaryAddress2" matSuffix mat-icon-button aria-label="Clear" (click)="primaryAddress2=''">
 					    <mat-icon>close</mat-icon>
@@ -101,12 +101,12 @@
 			</div>
 			<div class="form-group">
 				<mat-form-field class="mat-input">
-					<input 
-						matInput 
-						required 
-						placeholder="City" 
-						value="{{primaryCity}}" 
-						[(ngModel)]="primaryCity" 
+					<input
+						matInput
+						required
+						placeholder="City"
+						value="{{primaryCity}}"
+						[(ngModel)]="primaryCity"
 						formControlName="liveCity">
 					<button mat-button *ngIf="primaryCity" matSuffix mat-icon-button aria-label="Clear" (click)="primaryCity=''">
 					    <mat-icon>close</mat-icon>
@@ -119,12 +119,12 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<mat-form-field class="mat-input">
-						<input 
-							matInput 
-							required 
-							placeholder="State/Province" 
-							value="{{primaryState}}" 
-							[(ngModel)]="primaryState" 
+						<input
+							matInput
+							required
+							placeholder="State/Province"
+							value="{{primaryState}}"
+							[(ngModel)]="primaryState"
 							formControlName="liveState">
 						<button mat-button *ngIf="primaryState" matSuffix mat-icon-button aria-label="Clear" (click)="primaryState=''">
 						    <mat-icon>close</mat-icon>
@@ -136,12 +136,12 @@
 				</div>
 				<div class="form-group col-md-6">
 					<mat-form-field class="mat-input">
-						<input 
-							matInput 
-							required 
-							placeholder="Zip" 
-							value="{{primaryZip}}" 
-							[(ngModel)]="primaryZip" 
+						<input
+							matInput
+							required
+							placeholder="Zip"
+							value="{{primaryZip}}"
+							[(ngModel)]="primaryZip"
 							formControlName="liveZip">
 						<button mat-button *ngIf="primaryZip" matSuffix mat-icon-button aria-label="Clear" (click)="primaryZip=''">
 						    <mat-icon>close</mat-icon>
@@ -158,10 +158,10 @@
 						<strong>Please select your gender:</strong>
 					</p>
 					<mat-radio-group class="route-radio-group" formControlName="genderSelect" [(ngModel)]="gender">
-							<mat-radio-button 
+							<mat-radio-button
 								class="route-radio-button"
-								color="primary"  
-								*ngFor="let gender of matSelect" 
+								color="primary"
+								*ngFor="let gender of matSelect"
 								[value]="gender.value">
 								{{gender.viewValue}}
 							</mat-radio-button>
