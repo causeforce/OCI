@@ -19,16 +19,16 @@
 		<form class="form-container" [formGroup]="healthForm">
 			<div class="form-group">
 				<mat-form-field class="mat-input">
-					<input 
+					<input
 						id="healthInsName"
-						required  
-						matInput 
-						placeholder="Health Insurance Company Name:" 
-						value="{{healthInsName}}" 
+						required
+						matInput
+						placeholder="Health Insurance Company Name:"
+						value="{{healthInsName}}"
 						[(ngModel)]="healthInsName"
 						formControlName="healthName">
 					<!-- <mat-hint align="start">
-						<strong>This is a required field.</strong> 
+						<strong>This is a required field.</strong>
 					</mat-hint> -->
 
 				    <mat-error *ngIf="healthForm.controls.healthName.invalid">
@@ -38,17 +38,17 @@
 			</div>
 			<div class="form-group">
 				<mat-form-field class="mat-input">
-					<input 
-						id="healthInsNumber" 
-						required 
-						matInput 
-						minlength="5" 
-						placeholder="Health Insurance Policy Number:" 
-						value="{{healthInsNumber}}" 
+					<input
+						id="healthInsNumber"
+						required
+						matInput
+						minlength="5"
+						placeholder="Health Insurance Policy Number:"
+						value="{{healthInsNumber}}"
 						[(ngModel)]="healthInsNumber"
 						formControlName="healthNumber">
 					<!-- <mat-hint align="start">
-						<strong>This is a required field.</strong> 
+						<strong>This is a required field.</strong>
 					</mat-hint> -->
 
 				    <mat-error>
@@ -58,17 +58,22 @@
 			</div>
 		</form>
 	</div>
+
+  <div class="form-container">
+    <div class="border-btm"></div>
+  </div>
+
 	<div class="row bottom-nav-row">
 		<div class="form-container">
 			<div class="btn-container">
 				<button mat-raised-button color="accent" class="prev-btn" (click)="previousFlowStep()">
 					Back
 				</button>
-				<button 
-					mat-raised-button 
-					color="primary" 
-					class="next-btn" 
-					(click)="updateSurveyRes()" 
+				<button
+					mat-raised-button
+					color="primary"
+					class="next-btn"
+					(click)="updateSurveyRes()"
 					[disabled]="healthForm.invalid">
 					Next
 				</button>

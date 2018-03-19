@@ -21,6 +21,13 @@
 	width: 100%;
 }
 
+.mat-input {
+  max-width: 300px;
+  @media screen and (max-width: 400px) {
+    max-width: none;
+  }
+}
+
 .change-txt {
 	margin-bottom: 0px;
 	small {
