@@ -14,47 +14,47 @@ export class DataService {
 	// Event ID
 	eventID:any = '1641';
 
-	// Survey ID 
+	// Survey ID
 	surveyID:any = '82857';
 
 	// Survey Question ID(s) - below insert the Survey Question IDs
-	question1:string = '86997'; // How many years have you ridden with The Ride? 
-	question2:string = '86998'; // Waiver and Release Full Name 
-	question3:string = '86999'; // 18 Years Check Box 
-	
-	question4:string = '87000'; // Health Insurance Company name 
-	question5:string = '87001'; // Health Insurance Policy Number 
-	
-	question6:string = '87002'; // Accepted Upsell Offer 
-	question7:string = '87003'; // Donation Form Type 
-	question8:string = '87004'; // DSP Save Value 
-	
-	question9:string = '87005'; // Citizenship 
-	question10:string = '87006'; // Passport # 
+	question1:string = '86997'; // How many years have you ridden with The Ride?
+	question2:string = '86998'; // Waiver and Release Full Name
+	question3:string = '86999'; // 18 Years Check Box
 
-	question11:string = '87007'; // Birth Month 
-	question12:string = '87008'; // Birth Day 
-	question13:string = '87009'; // Birth Year 
+	question4:string = '87000'; // Health Insurance Company name
+	question5:string = '87001'; // Health Insurance Policy Number
 
-	question14:string = '87010'; // Want to be recognized as a cancer survivor? 
-	question15:string = '87011'; // Vegetarian meal 
+	question6:string = '87002'; // Accepted Upsell Offer
+	question7:string = '87003'; // Donation Form Type
+	question8:string = '87004'; // DSP Save Value
 
-	question16:string = '87012'; // Hidden Upsell Value 
-	question17:string = '87013'; // Hidden Safety Video Watched 
-	
-	question18:string = '87014'; // Jersey Size 
+	question9:string = '87005'; // Citizenship
+	question10:string = '87006'; // Passport #
+
+	question11:string = '87007'; // Birth Month
+	question12:string = '87008'; // Birth Day
+	question13:string = '87009'; // Birth Year
+
+	question14:string = '87010'; // Want to be recognized as a cancer survivor?
+	question15:string = '87011'; // Vegetarian meal
+
+	question16:string = '87012'; // Hidden Upsell Value
+	question17:string = '87013'; // Hidden Safety Video Watched
+
+	question18:string = '87014'; // Jersey Size
 
 	question19:string = '87015'; // Shuttle Question 1
 	question20:string = '87016'; // Shuttle Question 2
 	question21:string = '87017'; // Shuttle Question 3
 	question22:string = '87018'; // Shuttle Question 4
 	question23:string = '87019'; // Shuttle Question 5
-	
+
 	question24:string = '87020'; // Bike Transport
 
 	// Extra Survey Questions
-	question25:string = '87021'; // Route Number 
-	question26:string = '87022'; // Safety Rider 
+	question25:string = '87021'; // Route Number
+	question26:string = '87022'; // Safety Rider
 
 	// Upsell IDs
 	hiddenUpsellID:string = '1441'; // Upsell ID #1 copied from Teamraiser
@@ -155,8 +155,8 @@ export class DataService {
 	show:boolean = true;
 
 	// Tentmate Status Variable
-	tentStatus:string; 
- 	
+	tentStatus:string;
+
  	constructor(private http: HttpClient, private router: Router, public snackBar: MatSnackBar) {
 
  		if (localStorage.getItem('token') !== undefined || null) {
@@ -169,7 +169,7 @@ export class DataService {
  			this.storageConsID = localStorage.getItem('consID');
  			this.storageParticipationID = localStorage.getItem('participationID');
  		}
- 
+
  	}
 
 	// Retrieve a Survey based on Survey ID and Auth Token
@@ -180,7 +180,7 @@ export class DataService {
    		this.http.post(this.convioURL + this.method, null)
    			.subscribe(data => {
    				this.surveyResults = data;
-   			}, 
+   			},
    			(error) => {
    				if (error) {
    					console.log('There was an error while getting the survey data.')
@@ -199,7 +199,7 @@ export class DataService {
         });
 	}
 
-	// Check logged in state by a token retrieved by loggin into the app
+	// Check logged in state by a token retrieved by login into the app
 	isLoggedIn() {
 		return localStorage.getItem('token') !== null;
 	}
@@ -304,7 +304,7 @@ export class DataService {
 	// Update the current Flowstep
 	updateFlowStep() {
 		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.eventID + '&sso_auth_token=' + this.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.convioURL + this.method, null) 
+		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
 				this.updateRegRes = res;
 			}, (err) => {
@@ -320,15 +320,15 @@ export class DataService {
 			.subscribe(res => {
 				// Results from the API Call
 				this.regResponse = res;
-				
+
 				this.participationID = this.regResponse.getRegistrationResponse.registration.participationTypeId;
 				localStorage.setItem('participationID', this.participationID);
 				this.storageParticipationID = localStorage.getItem('participationID');
-				
+
 				// console.log('Storage Participation ID: ' + this.storageParticipationID);
 				// console.log('Login Participation ID: ' + this.participationID);
 				// console.log(this.regResponse);
-				
+
 				this.emergencyName = this.regResponse.getRegistrationResponse.registration.emergencyName;
 				this.emergencyPhone = this.regResponse.getRegistrationResponse.registration.emergencyPhone;
 
@@ -380,7 +380,7 @@ export class DataService {
 	// Gather Participation Type
 	getParticipationType() {
 		this.method = 'CRTeamraiserAPI?method=getParticipationType&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&participation_type_id=' + this.storageParticipationID;
-	
+
 		this.http.post(this.convioURL + this.method, null)
 		.subscribe(res => {
 			this.participationRes = res;
@@ -392,7 +392,7 @@ export class DataService {
 		});
 	}
 
-	// Update User Information 
+	// Update User Information
 	updateUser() {
 		const consUrl = '&cons_id='+ this.storageConsID;
 		const ssoUrl = '&sso_auth_token='+ this.storageToken;
@@ -482,9 +482,9 @@ export class DataService {
 		if (this.liveZip === undefined) {
 			var zipUrl = '&primary_address.zip=' + this.primaryZip;
 		}
-		
+
 		this.method = 'CRConsAPI?method=update&api_key=cfrca&v=1.0&response_format=json'+ consUrl + ssoUrl + firstNameUrl + lastNameUrl + genderUrl + address1Url + address2Url + cityUrl + stateUrl + zipUrl;
-		
+
 		this.http.post(this.convioURL + this.method, null)
 			.subscribe(res => {
 				this.updateUserResults = res;
@@ -511,7 +511,5 @@ export class DataService {
 				// console.log('There was an error getting the getTeam Info');
 				console.log(err);
 			});
-		
 	}
-
 }
