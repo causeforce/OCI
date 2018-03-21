@@ -52,7 +52,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { Step01Component } from './step-01/step-01.component';
-import { Step02Component } from './step-02/step-02.component';
+import { Step02Component, Step02Dialog } from './step-02/step-02.component';
 import { Step03Component } from './step-03/step-03.component';
 import { Step04Component } from './step-04/step-04.component';
 import { Step05Component } from './step-05/step-05.component';
@@ -106,6 +106,7 @@ export class ngMaterialModule {}
     AppComponent,
     Step01Component,
     Step02Component,
+    Step02Dialog,
     Step03Component,
     Step04Component,
     Step05Component,
@@ -125,6 +126,7 @@ export class ngMaterialModule {}
     ReactiveFormsModule,
     HttpClientModule
   ],
+  entryComponents: [Step02Component, Step02Dialog],
   providers: [DataService, Http],
   bootstrap: [AppComponent]
 })

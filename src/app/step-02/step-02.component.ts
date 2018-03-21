@@ -1,10 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
 
+/* FormGroup and Validators */
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+
+/* Router */
+import { Router } from '@angular/router';
+
+/* HTTP Client */
+import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
+
+/* Angular Material Compnents */
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+/* Data Service */
 import { DataService } from '../data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -59,12 +68,16 @@ export class Step02Component implements OnInit {
 	// Setting a variable to retrieve the constituent ID stored in the storageConsID (which is connected to localStorage)
 	localConsID:any = this.dataService.storageConsID;
 
-	constructor(private dataService: DataService, private router: Router, private http: HttpClient, public snackBar: MatSnackBar) {
+  constructor (private dataService: DataService,
+               private router: Router,
+               private http: HttpClient,
+               public snackBar: MatSnackBar,
+               public dialog: MatDialog) {
 
-		if (this.primaryAddress2 === null) {
-			this.primaryAddress2 = '';
-		}
-	}
+    if (this.primaryAddress2 === null) {
+      this.primaryAddress2 = '';
+    }
+  }
 
 	ngOnInit() {
 
@@ -74,6 +87,11 @@ export class Step02Component implements OnInit {
 		// Checking logged in state, if they are logged in run regInfo() and getUserInfo() functions from the global dataService.
 		if (this.dataService.isLoggedIn() === true && this.dataService.tokenExpired === false) {
 			// console.log('You are logged in!');
+
+      // Open welcome dialog / modal if logged in and in correct route
+      if (this.router.url === '/step-02'){
+        this.openDialog();
+      }
 
 			this.getRegInfo();
 			this.getUserInfo();
@@ -98,7 +116,7 @@ export class Step02Component implements OnInit {
 		}
 
 		if (this.consData.getConsResponse) {
-			
+
 			if (this.firstName === undefined || null) {
 				this.firstName = this.consData.getConsResponse.name.first;
 			}
@@ -127,16 +145,16 @@ export class Step02Component implements OnInit {
 			liveZip: new FormControl(this.primaryZip, Validators.required),
 			genderSelect: new FormControl(this.gender, Validators.required)
 		});
-		
+
 	}
 
 	// For calls after the view has been initialized
 	ngAfterViewInit() {}
-	
+
 	// Update the checkInStatus from Registration
 	updateCheckInStatus() {
 		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&checkin_status=' + this.checkInStatus + '&response_format=json';
-		this.http.post(this.dataService.convioURL + this.method, null) 
+		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.updateRegRes = res;
 			});
@@ -150,7 +168,7 @@ export class Step02Component implements OnInit {
 			.subscribe(res => {
 				this.dataService.regResponse = res;
 				// console.log(this.dataService.regResponse);
-				
+
 				// Setting the participation ID Variables
 				this.dataService.participationID = this.dataService.regResponse.getRegistrationResponse.registration.participationTypeId;
 				localStorage.setItem('participationID', this.dataService.participationID);
@@ -275,7 +293,7 @@ export class Step02Component implements OnInit {
 	// Update the Flow Step
 	updateFlowStep() {
 		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
+		this.http.post(this.dataService.convioURL + this.dataService.method, null)
 			.subscribe(res => {
 				this.updateRegRes = res;
 			});
@@ -283,10 +301,32 @@ export class Step02Component implements OnInit {
 
 	updateFlowStepNext() {
 		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.storageToken + '&flow_step=2' + '&response_format=json';
-		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
+		this.http.post(this.dataService.convioURL + this.dataService.method, null)
 			.subscribe(res => {
 				this.updateRegRes = res;
 				this.router.navigate(['/step-03']);
 			});
 	}
+
+  openDialog() {
+    this.dialog.open(Step02Dialog, {
+      width: '600px'
+    });
+  }
+}
+
+@Component({
+  selector: 'step-02-dialog',
+  templateUrl: './step-02.dialog.html',
+  styleUrls: ['./step-02.component.scss']
+})
+export class Step02Dialog {
+  constructor
+  (@Inject(MAT_DIALOG_DATA)
+   public data: any,
+   public dialogRef: MatDialogRef<Step02Dialog>,
+   private dataService: DataService) {}
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

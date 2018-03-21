@@ -95,7 +95,7 @@ export class Step03Component implements OnInit {
 	// Specifying API Method Variable
 	method:string;
 
-	constructor(private dataService: DataService, private route: Router, private http: HttpClient, public snackBar: MatSnackBar) { 
+	constructor(private dataService: DataService, private route: Router, private http: HttpClient, public snackBar: MatSnackBar) {
 	}
 
 	ngOnInit() {
@@ -124,7 +124,7 @@ export class Step03Component implements OnInit {
 			// Get the current flowstep
 			this.getFlowStep();
 
-			// this.dataService.getParticipationType();
+			this.dataService.getParticipationType();
 		} else if (this.dataService.storageToken === undefined) {
 			this.snackBar.open("Login session expired, please login again.", "Close", {
                 duration: 3500,
@@ -159,7 +159,7 @@ export class Step03Component implements OnInit {
 			.subscribe(res => {
 				this.surveyResults = res;
 
-				// For loop to get Survey Data and set it to the correct variables (this is important for data to be retrieved and displayed in the DOM properly). It checks if the data exists already to set it to the proper element in the DOM, if the data does NOT exist, set is as blank (null or undefined causes issues). 
+				// For loop to get Survey Data and set it to the correct variables (this is important for data to be retrieved and displayed in the DOM properly). It checks if the data exists already to set it to the proper element in the DOM, if the data does NOT exist, set is as blank (null or undefined causes issues).
 
 				for (let res of this.surveyResults.getSurveyResponsesResponse.responses) {
 
@@ -183,7 +183,7 @@ export class Step03Component implements OnInit {
 						}
 					}
 
-					// How many years have you ridden with The Ride? 
+					// How many years have you ridden with The Ride?
 					if (res.questionId === this.dataService.question1) {
 						this.attendenceRes = res.responseValue;
 						if (this.attendenceRes === undefined || null) {
@@ -200,7 +200,7 @@ export class Step03Component implements OnInit {
 						if (this.jerseyRes === '[object Object]') {
 							console.log('jersey empty object');
 						}
-						
+
 						if (this.jerseyRes === undefined || null) {
 							this.jerseyRes = res.responseValue;
 						}
@@ -313,7 +313,7 @@ export class Step03Component implements OnInit {
 				// console.log(res);
 				this.updateReg();
 				this.route.navigate(['/step-04']);
-			}, 
+			},
 			(error) => {
 				console.log(error);
 				this.route.navigate(['/step-01']);
@@ -358,7 +358,7 @@ export class Step03Component implements OnInit {
                         duration: 3500,
                         extraClasses: ['saved-info']
                 });
-			}, 
+			},
 			(error) => {
 				console.log(error);
 				this.snackBar.open("There was an error while saving your form!", "Close", {
@@ -382,7 +382,7 @@ export class Step03Component implements OnInit {
 		this.flowStep = '3';
 
 		this.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&emergency_name=' + this.dataService.emergencyName + '&emergency_phone=' + this.dataService.emergencyPhone + '&response_format=json';
-		this.http.post(this.dataService.convioURL + this.method, null) 
+		this.http.post(this.dataService.convioURL + this.method, null)
 			.subscribe(res => {
 				this.snackBar.open("Your information has been saved!", "Close", {
                         duration: 3500,
@@ -435,7 +435,7 @@ export class Step03Component implements OnInit {
 	previousFlowStep() {
 		this.flowStep = '1';
 		this.dataService.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.dataService.eventID + '&sso_auth_token=' + this.dataService.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.dataService.convioURL + this.dataService.method, null) 
+		this.http.post(this.dataService.convioURL + this.dataService.method, null)
 			.subscribe(res => {
 				// console.log('Flow step updated.')
 				this.previous();
