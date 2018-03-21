@@ -290,16 +290,16 @@ export class DataService {
 
 	// Get the current Flowstep
 	getFlowStep() {
-		const token = localStorage.getItem('token');
-		this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.ssoToken;
-		this.http.post(this.convioURL + this.method, null)
-			.subscribe(res => {
-				this.flowStepResults = res;
-				this.flowStep = parseInt(this.flowStepResults.getFlowStepResponse.flowStep);
+ 	  const token = localStorage.getItem('token');
+ 	  this.method = 'CRTeamraiserAPI?method=getFlowStep&api_key=cfrca&v=1.0&response_format=json&fr_id='+ this.eventID + '&sso_auth_token='+ this.ssoToken;
+ 	    this.http.post(this.convioURL + this.method, null)
+      .subscribe(res => {
+        this.flowStepResults = res;
+			this.flowStep = parseInt(this.flowStepResults.getFlowStepResponse.flowStep);
 			}, (err) => {
-				console.log(err);
-			});
-	}
+        console.log(err);
+      });
+ 	}
 
 	// Update the current Flowstep
 	updateFlowStep() {
@@ -447,40 +447,40 @@ export class DataService {
 	updateUserSave() {
 		const consUrl = '&cons_id='+ this.storageConsID;
 		const ssoUrl = '&sso_auth_token='+ this.storageToken;
-		var firstNameUrl = '&name.first=' + this.liveFirstName;
-		var lastNameUrl = '&name.last=' + this.liveLastName;
-		var address1Url = '&primary_address.street1=' + this.liveAddress1;
-		var address2Url = '&primary_address.street2=' + this.liveAddress2;
-		var cityUrl = '&primary_address.city=' + this.liveCity;
-		var stateUrl = '&primary_address.state=' + this.liveState;
-		var zipUrl = '&primary_address.zip=' + this.liveZip;
+		const firstNameUrl = '&name.first=' + this.liveFirstName;
+		const lastNameUrl = '&name.last=' + this.liveLastName;
+		const address1Url = '&primary_address.street1=' + this.liveAddress1;
+		const address2Url = '&primary_address.street2=' + this.liveAddress2;
+		const cityUrl = '&primary_address.city=' + this.liveCity;
+		const stateUrl = '&primary_address.state=' + this.liveState;
+		const zipUrl = '&primary_address.zip=' + this.liveZip;
 		const genderUrl = '&gender=' + this.genderSelect;
 
 		// Checking if input data is undefined if so set it as what it previously was (to prevent data getting saved as undefined)
 		if (this.liveFirstName === undefined) {
-			var firstNameUrl = '&name.first=' + this.firstName;
+			const firstNameUrl = '&name.first=' + this.firstName;
 		}
 		if (this.liveLastName === undefined) {
-			var lastNameUrl = '&name.first=' + this.lastName;
+			const lastNameUrl = '&name.first=' + this.lastName;
 		}
 		if (this.liveAddress1 === undefined) {
-			var address1Url = '&primary_address.street1=' + this.primaryAddress1;
+			const address1Url = '&primary_address.street1=' + this.primaryAddress1;
 		}
 		if (this.liveAddress2 === undefined) {
-			var address2Url = '&primary_address.street2=' + this.primaryAddress2;
+			const address2Url = '&primary_address.street2=' + this.primaryAddress2;
 		}
 		if (this.primaryAddress2 || this.liveAddress2  === null) {
 			this.primaryAddress2 = '';
 			this.liveAddress2 = '';
 		}
 		if (this.liveCity === undefined) {
-			var cityUrl = '&primary_address.city=' + this.primaryCity;
+			const cityUrl = '&primary_address.city=' + this.primaryCity;
 		}
 		if (this.liveState === undefined) {
-			var stateUrl = '&primary_address.city=' + this.primaryState;
+			const stateUrl = '&primary_address.city=' + this.primaryState;
 		}
 		if (this.liveZip === undefined) {
-			var zipUrl = '&primary_address.zip=' + this.primaryZip;
+			const zipUrl = '&primary_address.zip=' + this.primaryZip;
 		}
 
 		this.method = 'CRConsAPI?method=update&api_key=cfrca&v=1.0&response_format=json'+ consUrl + ssoUrl + firstNameUrl + lastNameUrl + genderUrl + address1Url + address2Url + cityUrl + stateUrl + zipUrl;

@@ -180,7 +180,8 @@
 
 				<!-- Years attended -->
 				<div class="form-group" *ngIf="res.questionId === dataService.question1">
-					<p><strong>{{res.questionText}}</strong></p>
+					<p *ngIf="dataService.participationType !== 'Crew'"><strong>{{res.questionText}}</strong></p>
+          <p *ngIf="dataService.participationType === 'Crew'"><strong>How many years have you Crewed with the Ride?</strong></p>
 					<mat-form-field>
 						<mat-select class="mat-select" placeholder="Years Attended" [(ngModel)]="attendenceRes" formControlName="yearsAttended">
 						  	<p class="change-txt">
