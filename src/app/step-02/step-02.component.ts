@@ -321,11 +321,15 @@ export class Step02Component implements OnInit {
   styleUrls: ['./step-02.component.scss']
 })
 export class Step02Dialog {
+  firstName: string;
   constructor
   (@Inject(MAT_DIALOG_DATA)
    public data: any,
    public dialogRef: MatDialogRef<Step02Dialog>,
-   private dataService: DataService) {}
+   private dataService: DataService) {
+    dataService.getUserInfo();
+    this.firstName = dataService.firstName;
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

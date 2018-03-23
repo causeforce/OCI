@@ -17,16 +17,14 @@
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl magna, lacinia eget eros vitae, tincidunt consectetur neque. Suspendisse eu justo eleifend, vulputate lectus interdum, vestibulum libero.
 				</p>
-				<p>You are registered as a <strong>{{ dataService.participationType }}</strong>. If this is incorrect, please call (888) 771-BIKE(2453)</p>
 			</div>
 		</div>
 	</div>
 	<div class="row" *ngIf="consData">
 		<form class="form-container" [formGroup]="step02Form" *ngIf="step02Form">
 			<div class="form-group">
-				<label class="font-bold" for="participation-type">
-					Participation Type: {{ dataService.participationType }}
-				</label>
+        <p>You are registered as a <strong>{{ dataService.participationType }}</strong>. If this is incorrect, please call
+          <a class="link-black" href="tel:1-888-771-2453">1 (888) 771-2453</a></p>
 			</div>
 			<div class="form-group" *ngIf="dataService.teamName">
 				<label class="font-bold" for="team-name">
