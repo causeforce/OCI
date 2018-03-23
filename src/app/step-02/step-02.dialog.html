@@ -1,5 +1,5 @@
-<h1 mat-dialog-title class="dialog-h1">
-  Welcome to Online Check-in!
+<h1 *ngIf="dataService" mat-dialog-title class="dialog-h1">
+  Welcome to Online Check-in, {{dataService.firstName}}!
 </h1>
 
 <div mat-dialog-content>

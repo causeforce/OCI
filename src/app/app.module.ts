@@ -126,7 +126,7 @@ export class ngMaterialModule {}
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents: [Step02Component, Step02Dialog],
+  entryComponents: [Step01Component, Step02Dialog],
   providers: [DataService, Http],
   bootstrap: [AppComponent]
 })
