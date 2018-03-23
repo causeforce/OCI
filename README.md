@@ -1,8 +1,9 @@
 # Online Check-in for ConquerCancer.ca
 
-This web application was created for participants of The Ride to Conquer Cancer - www.conquercancer.ca
+This web application was created for participants of The Ride to Conquer Cancer - (http://www.conquercancer.ca)
 
-Built with Angular 5, Bootstrap 4, and Angular Material 2 (custom theme).
+### Frameworks / Libraries:
+Angular 5.2.9, Angular Material 5.2.4, Bootstrap 4.0.0
 
 Luminate Online API as the API end-point/"back-end". (http://open.convio.com/api/#main)
 
