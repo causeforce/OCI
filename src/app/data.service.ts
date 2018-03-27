@@ -60,6 +60,9 @@ export class DataService {
 	hiddenUpsellID:string = '1441'; // Upsell ID #1 copied from Teamraiser
 	hiddenUpsellID2:string = '1443'; // Upsell ID #2 copied from Teamraiser
 
+  // Safety Video
+  safetyVidURL:string = 'assets/videos/oci_sample_vid.mp4';
+
 	// Login Information
  	username:string;
 	password:string;
@@ -74,7 +77,7 @@ export class DataService {
 	// Setting logged in state (must be false initially)
 	isloggedIn:any = false;
 
-	// Registeration Variables
+	// Registration Variables
 	regResponse:any = {};
 
 	// Setting flow step state

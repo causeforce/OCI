@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl,FormGroup, FormGroupDirective, NgForm, Validators  } from '@angular/forms';
-import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
+import { FormControl, FormGroup, Validators  } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 /* Angular Material */
 import { MatSnackBar } from '@angular/material';
@@ -133,7 +133,7 @@ export class Step05Component implements OnInit {
 				for (let data of this.surveyResults.getSurveyResponsesResponse.responses) {
 					// If questionId is same as waiver question ID in Survey then check if fullName variable is undefined or null, if so set it as the response value else if it's length is equil to 0 or no reponseValue, then set it to a blank string
 
-					// Waiver and Release Full Name 
+					// Waiver and Release Full Name
 					if (data.questionId === this.data.question2) {
 						if (this.fullName === undefined || null) {
 							this.fullName = data.responseValue;
@@ -143,7 +143,7 @@ export class Step05Component implements OnInit {
 						}
 					}
 
-					// 18 Years Check Box 
+					// 18 Years Check Box
 					if (data.questionId === this.data.question3) {
 						if (this.ageResponseVal === undefined || null) {
 							this.ageResponseVal = data.responseValue;
@@ -162,7 +162,7 @@ export class Step05Component implements OnInit {
 						}
 					}
 
-					// Hidden Safety Video Watched 
+					// Hidden Safety Video Watched
 					if (data.questionId === this.data.question17) {
 						if (this.videoResponse === undefined || null) {
 							this.videoResponse = data.responseValue;
@@ -175,7 +175,7 @@ export class Step05Component implements OnInit {
 						}
 					}
 				}
-			}, 
+			},
 			(err) => {
 				console.log('There was an error!');
 				if (err.status === 403) {
@@ -205,9 +205,9 @@ export class Step05Component implements OnInit {
                         extraClasses: ['saved-info']
                 });
 
-				// Once the updateSurveyRes() function is successful, update the flowStep to the next flowStep 
+				// Once the updateSurveyRes() function is successful, update the flowStep to the next flowStep
                 this.nextFlowStep();
-			}, 
+			},
 			error => {
 				console.log('There was an error');
 			});
@@ -229,7 +229,7 @@ export class Step05Component implements OnInit {
                         duration: 3500,
                         extraClasses: ['saved-info']
                 });
-			}, 
+			},
 			error => {
 				console.log('There was an error');
 			});
@@ -247,7 +247,7 @@ export class Step05Component implements OnInit {
 	// Update the current Flowstep
 	updateFlowStep() {
 		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.data.convioURL + this.data.method, null) 
+		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				// console.log('Flow step updated.')
 			}, (err) => {
@@ -261,7 +261,7 @@ export class Step05Component implements OnInit {
 	nextFlowStep() {
 		this.flowStep = '5';
 		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.data.convioURL + this.data.method, null) 
+		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 				// Update the flowStep to the next flowstep once everything checks out properly
 				this.route.navigate(['/step-06']);
@@ -276,7 +276,7 @@ export class Step05Component implements OnInit {
 	previousFlowStep() {
 		this.flowStep = '3';
 		this.data.method = 'CRTeamraiserAPI?method=updateRegistration&api_key=cfrca&v=1.0' + '&fr_id=' + this.data.eventID + '&sso_auth_token=' + this.data.ssoToken + '&flow_step=' + this.flowStep + '&response_format=json';
-		this.http.post(this.data.convioURL + this.data.method, null) 
+		this.http.post(this.data.convioURL + this.data.method, null)
 			.subscribe(res => {
 
 				// Route user to previous flow step

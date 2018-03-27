@@ -259,13 +259,13 @@ export class Step02Component implements OnInit {
 
 		const consUrl = '&cons_id='+ this.dataService.storageConsID;
 		const ssoUrl = '&sso_auth_token='+ this.dataService.storageToken;
-		var firstNameUrl = '&name.first=' + this.firstName;
-		var lastNameUrl = '&name.last=' + this.lastName;
-		var address1Url = '&primary_address.street1=' + this.primaryAddress1;
-		var address2Url = '&primary_address.street2=' + this.primaryAddress2;
-		var cityUrl = '&primary_address.city=' + this.primaryCity;
-		var stateUrl = '&primary_address.state=' + this.primaryState;
-		var zipUrl = '&primary_address.zip=' + this.primaryZip;
+		const firstNameUrl = '&name.first=' + this.firstName;
+		const lastNameUrl = '&name.last=' + this.lastName;
+		const address1Url = '&primary_address.street1=' + this.primaryAddress1;
+		const address2Url = '&primary_address.street2=' + this.primaryAddress2;
+		const cityUrl = '&primary_address.city=' + this.primaryCity;
+		const stateUrl = '&primary_address.state=' + this.primaryState;
+		const zipUrl = '&primary_address.zip=' + this.primaryZip;
 		const genderUrl = '&gender=' + this.gender;
 
 		this.method = 'CRConsAPI?method=update&api_key=cfrca&v=1.0&response_format=json'+ consUrl + ssoUrl + firstNameUrl + lastNameUrl + genderUrl + address1Url + address2Url + cityUrl + stateUrl + zipUrl;
