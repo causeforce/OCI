@@ -56,12 +56,12 @@ export class Step03Component implements OnInit {
 	// Select Options for Yes/No
 	matSelect = [
 		{value: 'Yes', viewValue: 'Yes'},
-	    {value: 'No', viewValue: 'No'}
+    {value: 'No', viewValue: 'No'}
 	]
 
 	// Select Options for Jesey Sizes
 	jerseySelect = [
-		{value: 'XS', viewValue: 'XS'},
+		  {value: 'XS', viewValue: 'XS'},
 	    {value: 'S', viewValue: 'S'},
 	    {value: 'M', viewValue: 'M'},
 	    {value: 'L', viewValue: 'L'},
